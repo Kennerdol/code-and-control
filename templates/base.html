@@ -1,0 +1,150 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>
+            {% block title %}
+                Code & Control | Where Software Meets Automation
+            {% endblock %}
+        </title>
+
+        <meta
+            name="description"
+            content="Code & Control — Where Software Meets Automation. Software development, industrial automation, data and technology education."
+        >
+
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    </head>
+
+    <body>
+
+        <!-- ================= NAVIGATION ================= -->
+
+        <header class="site-header">
+
+            <nav class="navbar">
+
+                <a href="{% url 'home' %}" class="brand">
+
+                    <div class="brand-mark">
+                        C&C
+                    </div>
+
+                    <div class="brand-text">
+                        <span class="brand-name">CODE & CONTROL</span>
+                        <span class="brand-tagline">
+                            Where Software Meets Automation
+                        </span>
+                    </div>
+
+                </a>
+
+
+                <button
+                    class="menu-toggle"
+                    id="menuToggle"
+                    aria-label="Toggle navigation"
+                >
+                    ☰
+                </button>
+
+
+                <div class="nav-links" id="navLinks">
+
+                    <a href="{% url 'home' %}" class="active">
+                        Home
+                    </a>
+
+                    <a href="{% url 'about' %}">
+                        About
+                    </a>
+
+                    <a href="#">
+                        Skills
+                    </a>
+
+                    <a href="{% url 'project_list' %}">
+                        Projects
+                    </a>
+
+                    <a href="#">
+                        Courses
+                    </a>
+
+                    <a href="#">
+                        Blog
+                    </a>
+
+                    <a href="#">
+                        Resources
+                    </a>
+
+                    <a href="#">
+                        Contact
+                    </a>
+
+                </div>
+
+            </nav>
+
+        </header>
+
+
+        <!-- ================= MAIN CONTENT ================= -->
+
+        <main>
+
+            {% block content %}
+            {% endblock %}
+
+        </main>
+
+
+        <!-- ================= FOOTER ================= -->
+
+        <footer class="site-footer">
+
+            <div class="footer-container">
+
+                <div class="footer-brand">
+
+                    <h2>CODE & CONTROL</h2>
+
+                    <p>
+                        Where Software Meets Automation.
+                    </p>
+
+                </div>
+
+
+                <div class="footer-links">
+
+                    <a href="#">GitHub</a>
+                    <a href="#">LinkedIn</a>
+                    <a href="#">YouTube</a>
+
+                </div>
+
+            </div>
+
+
+            <div class="footer-bottom">
+
+                <p>
+                    © {% now "Y" %} Code & Control.
+                    All rights reserved.
+                </p>
+
+            </div>
+
+        </footer>
+
+
+        <script src="{% static 'js/main.js' %}"></script>
+
+    </body>
+</html>

@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+    {{ project.title }} | Code & Control
+{% endblock %}
+
+
+{% block content %}
+
+<section class="page-header">
+
+    <div class="page-header-container">
+
+        <span class="section-label">
+            {{ project.get_project_type_display }}
+        </span>
+
+        <h1>
+            {{ project.title }}
+        </h1>
+
+        <p>
+            {{ project.short_description }}
+        </p>
+
+    </div>
+
+</section>
+
+
+<section class="section">
+
+    <div class="project-detail">
+
+        {% if project.featured_image %}
+
+            <img
+                src="{{ project.featured_image.url }}"
+                alt="{{ project.title }}"
+                class="project-detail-image"
+            >
+
+        {% endif %}
+
+
+        <div class="project-detail-content">
+
+            <span class="section-label">
+                TECHNOLOGIES
+            </span>
+
+            <p class="project-technologies">
+                {{ project.technologies }}
+            </p>
+
+
+            <h2>
+                About the Project
+            </h2>
+
+            <div class="project-description">
+
+                {{ project.description|linebreaks }}
+
+            </div>
+
+
+            <div class="project-actions">
+
+                {% if project.github_url %}
+
+                    <a
+                        href="{{ project.github_url }}"
+                        target="_blank"
+                        class="btn btn-outline"
+                    >
+                        GitHub →
+                    </a>
+
+                {% endif %}
+
+
+                {% if project.live_url %}
+
+                    <a
+                        href="{{ project.live_url }}"
+                        target="_blank"
+                        class="btn btn-primary"
+                    >
+                        Live Project →
+                    </a>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

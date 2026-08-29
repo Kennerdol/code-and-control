@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+    Projects | Code & Control
+{% endblock %}
+
+
+{% block content %}
+
+<section class="page-header">
+
+    <div class="page-header-container">
+
+        <span class="section-label">
+            PORTFOLIO
+        </span>
+
+        <h1>
+            Things I've Built.
+        </h1>
+
+        <p>
+            Software, automation, data and technology projects
+            developed through experimentation and real-world
+            problem solving.
+        </p>
+
+    </div>
+
+</section>
+
+
+<section class="section">
+
+    <div class="projects-grid">
+
+        {% for project in projects %}
+
+            <article class="project-card">
+
+                <div class="project-image">
+
+                    {% if project.featured_image %}
+
+                        <img
+                            src="{{ project.featured_image.url }}"
+                            alt="{{ project.title }}"
+                        >
+
+                    {% else %}
+
+                        <span class="project-symbol">
+                            &lt;/&gt;
+                        </span>
+
+                    {% endif %}
+
+                </div>
+
+
+                <div class="project-content">
+
+                    <span class="project-category">
+                        {{ project.get_project_type_display }}
+                    </span>
+
+                    <h3>
+                        {{ project.title }}
+                    </h3>
+
+                    <p>
+                        {{ project.short_description }}
+                    </p>
+
+                    <a href="{{ project.get_absolute_url }}">
+                        View Project →
+                    </a>
+
+                </div>
+
+            </article>
+
+        {% empty %}
+
+            <p>
+                No projects have been added yet.
+            </p>
+
+        {% endfor %}
+
+    </div>
+
+</section>
+
+{% endblock %}
