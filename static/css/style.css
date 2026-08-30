@@ -3467,3 +3467,93 @@ select {
     }
 
 }
+
+/* ================= RELATED CONTENT ================= */
+
+.related-content {
+    margin-top: 70px;
+
+    padding-top: 40px;
+
+    border-top:
+        1px solid var(--border);
+}
+
+
+.related-card {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 30px;
+
+    margin-top: 20px;
+
+    padding: 25px;
+
+    border:
+        1px solid var(--border);
+
+    background: #101010;
+
+    transition:
+        border-color 0.25s ease,
+        transform 0.25s ease;
+}
+
+
+.related-card:hover {
+    transform: translateY(-3px);
+
+    border-color:
+        rgba(217, 154, 0, 0.45);
+}
+
+
+.related-card h3 {
+    margin-top: 8px;
+
+    font-size: 23px;
+}
+
+
+.related-card p {
+    margin-top: 8px;
+
+    color: var(--muted);
+
+    line-height: 1.6;
+}
+
+
+.related-type {
+    color: var(--gold);
+
+    font-size: 10px;
+
+    text-transform: uppercase;
+
+    letter-spacing: 1.5px;
+}
+
+
+.related-resources {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 15px;
+}
+
+
+@media (max-width: 600px) {
+
+    .related-card {
+        flex-direction: column;
+
+        align-items: flex-start;
+    }
+
+}

@@ -1,29 +1,26 @@
 from django.db import models
 from django.urls import reverse
 
-
-class BlogCategory(models.Model):
-
-    name = models.CharField(
-        max_length=100,
-        unique=True
-    )
-
-    slug = models.SlugField(
-        max_length=100,
-        unique=True
-    )
-
-    class Meta:
-        verbose_name = "Blog Category"
-        verbose_name_plural = "Blog Categories"
-        ordering = ["name"]
-
-    def __str__(self):
-        return self.name
+from portfolio.models import Project
+from resources.models import Resource
 
 
-class BlogPost(models.Model):
+class Post(models.Model):
+
+    CATEGORY_CHOICES = [
+        ("programming", "Programming"),
+        ("automation", "Automation"),
+        ("embedded", "Embedded Systems"),
+        ("data", "Data & Analytics"),
+        ("career", "Career"),
+        ("tutorial", "Tutorial"),
+        ("other", "Other"),
+    ]
+
+    STATUS_CHOICES = [
+        ("draft", "Draft"),
+        ("published", "Published"),
+    ]
 
     title = models.CharField(
         max_length=200
@@ -34,19 +31,16 @@ class BlogPost(models.Model):
         unique=True
     )
 
-    category = models.ForeignKey(
-        BlogCategory,
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        related_name="posts"
-    )
-
-    excerpt = models.TextField(
-        max_length=500
+    excerpt = models.CharField(
+        max_length=300
     )
 
     content = models.TextField()
+
+    category = models.CharField(
+        max_length=30,
+        choices=CATEGORY_CHOICES
+    )
 
     featured_image = models.ImageField(
         upload_to="blog/",
@@ -54,12 +48,33 @@ class BlogPost(models.Model):
         null=True
     )
 
+    status = models.CharField(
+        max_length=20,
+        choices=STATUS_CHOICES,
+        default="draft"
+    )
+
     featured = models.BooleanField(
         default=False
     )
 
-    published = models.BooleanField(
-        default=True
+    author = models.CharField(
+        max_length=100,
+        default="Code & Control"
+    )
+
+    related_project = models.ForeignKey(
+        Project,
+        on_delete=models.SET_NULL,
+        blank=True,
+        null=True,
+        related_name="blog_posts"
+    )
+
+    related_resources = models.ManyToManyField(
+        Resource,
+        blank=True,
+        related_name="blog_posts"
     )
 
     created_at = models.DateTimeField(
@@ -77,7 +92,10 @@ class BlogPost(models.Model):
         return self.title
 
     def get_absolute_url(self):
+
         return reverse(
-            "blog_detail",
-            kwargs={"slug": self.slug}
+            "post_detail",
+            kwargs={
+                "slug": self.slug
+            }
         )

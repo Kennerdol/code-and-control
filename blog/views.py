@@ -1,41 +1,39 @@
-from django.views.generic import ListView, DetailView
+# from django.views.generic import ListView, DetailView
 
-from .models import BlogPost
+from django.views.generic import DetailView, ListView
+
+from .models import Post
 
 
-class BlogListView(ListView):
+class PostListView(ListView):
 
-    model = BlogPost
+    model = Post
 
-    template_name = "blog/blog_list.html"
+    template_name = "blog/post_list.html"
 
     context_object_name = "posts"
 
-    paginate_by = 6
+    paginate_by = 9
 
     def get_queryset(self):
+
         return (
-            BlogPost.objects
-            .filter(published=True)
-            .select_related("category")
+            Post.objects
+            .filter(status="published")
+            .order_by("-created_at")
         )
 
 
-class BlogDetailView(DetailView):
+class PostDetailView(DetailView):
 
-    model = BlogPost
+    model = Post
 
-    template_name = "blog/blog_detail.html"
+    template_name = "blog/post_detail.html"
 
     context_object_name = "post"
 
-    slug_field = "slug"
-
-    slug_url_kwarg = "slug"
-
     def get_queryset(self):
-        return (
-            BlogPost.objects
-            .filter(published=True)
-            .select_related("category")
+
+        return Post.objects.filter(
+            status="published"
         )
