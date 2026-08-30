@@ -1,0 +1,209 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+    {{ course.title }} | Code & Control
+{% endblock %}
+
+
+{% block content %}
+
+<section class="page-header">
+
+    <div class="page-header-container">
+
+        <span class="section-label">
+            COURSE
+        </span>
+
+        <h1>
+            {{ course.title }}
+        </h1>
+
+        <p>
+            {{ course.short_description }}
+        </p>
+
+    </div>
+
+</section>
+
+
+<section class="section">
+
+    <div class="course-detail">
+
+        {% if course.featured_image %}
+
+            <img
+                src="{{ course.featured_image.url }}"
+                alt="{{ course.title }}"
+                class="course-detail-image"
+            >
+
+        {% endif %}
+
+
+        <div class="course-detail-grid">
+
+
+            <!-- COURSE INFORMATION -->
+
+            <div class="course-detail-content">
+
+                <span class="section-label">
+                    ABOUT THIS COURSE
+                </span>
+
+                <h2>
+                    {{ course.title }}
+                </h2>
+
+                <p>
+                    {{ course.description }}
+                </p>
+
+            </div>
+
+
+            <!-- COURSE CARD -->
+
+            <aside class="course-enrol-card">
+
+                <div class="course-enrol-header">
+
+                    <span>
+                        COURSE INFORMATION
+                    </span>
+
+                </div>
+
+
+                <div class="course-enrol-body">
+
+                    <div class="course-info-row">
+
+                        <span>
+                            Level
+                        </span>
+
+                        <strong>
+                            {{ course.get_level_display }}
+                        </strong>
+
+                    </div>
+
+
+                    {% if course.duration %}
+
+                    <div class="course-info-row">
+
+                        <span>
+                            Duration
+                        </span>
+
+                        <strong>
+                            {{ course.duration }}
+                        </strong>
+
+                    </div>
+
+                    {% endif %}
+
+
+                    {% if course.technology %}
+
+                    <div class="course-info-row">
+
+                        <span>
+                            Technology
+                        </span>
+
+                        <strong>
+                            {{ course.technology }}
+                        </strong>
+
+                    </div>
+
+                    {% endif %}
+
+
+                    <div class="course-info-row">
+
+                        <span>
+                            Instructor
+                        </span>
+
+                        <strong>
+                            {{ course.instructor }}
+                        </strong>
+
+                    </div>
+
+
+                    <a
+                        href="#"
+                        class="btn btn-primary course-enrol-button"
+                    >
+                        Enrol Now →
+                    </a>
+
+                </div>
+
+            </aside>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<section class="section learning">
+
+    <div class="learning-container">
+
+        <div>
+
+            <span class="section-label">
+                READY TO BUILD?
+            </span>
+
+            <h2>
+                Start Learning.
+            </h2>
+
+            <p>
+                Follow the course, build the projects and
+                develop the skills needed to create your
+                own solutions.
+            </p>
+
+        </div>
+
+
+        <div class="learning-topics">
+
+            <div>
+                PRACTICAL
+            </div>
+
+            <div>
+                PROJECT BASED
+            </div>
+
+            <div>
+                STEP BY STEP
+            </div>
+
+            <div>
+                REAL WORLD
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

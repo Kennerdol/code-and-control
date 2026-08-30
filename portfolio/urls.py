@@ -9,15 +9,9 @@ from .views import (
 urlpatterns = [
 
     path(
-        "",
-        ProjectListView.as_view(),
-        name="project_list"
-    ),
+        "", ProjectListView.as_view(), name="project_list"),
 
     path(
-        "<slug:slug>/",
-        ProjectDetailView.as_view(),
-        name="project_detail"
-    ),
+        "<slug:slug>/", ProjectDetailView.as_view(), name="project_detail"),
 
 ]

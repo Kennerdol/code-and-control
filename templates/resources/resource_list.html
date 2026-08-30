@@ -1,0 +1,161 @@
+{% extends "base.html" %}
+
+
+{% block title %}
+    Resources | Code & Control
+{% endblock %}
+
+
+{% block content %}
+
+<section class="page-header">
+
+    <div class="page-header-container">
+
+        <span class="section-label">
+            KNOWLEDGE BASE
+        </span>
+
+        <h1>
+            Resources.
+        </h1>
+
+        <p>
+            Practical guides, tutorials, cheat sheets,
+            source code and other resources to help you learn
+            and build.
+        </p>
+
+    </div>
+
+</section>
+
+
+<section class="section">
+
+    <div class="resource-grid">
+
+        {% for resource in resources %}
+
+            <article class="resource-card">
+
+                <div class="resource-image">
+
+                    {% if resource.featured_image %}
+
+                        <img
+                            src="{{ resource.featured_image.url }}"
+                            alt="{{ resource.title }}"
+                        >
+
+                    {% else %}
+
+                        <div class="resource-placeholder">
+
+                            <span>
+                                {{ resource.get_resource_type_display|upper }}
+                            </span>
+
+                        </div>
+
+                    {% endif %}
+
+                    <span class="resource-category">
+                        {{ resource.get_category_display }}
+                    </span>
+
+                </div>
+
+
+                <div class="resource-content">
+
+                    <div class="resource-meta">
+
+                        {{ resource.get_resource_type_display }}
+
+                    </div>
+
+
+                    <h2>
+                        {{ resource.title }}
+                    </h2>
+
+
+                    <p>
+                        {{ resource.short_description }}
+                    </p>
+
+
+                    <a
+                        href="{{ resource.get_absolute_url }}"
+                        class="resource-link"
+                    >
+                        View Resource →
+                    </a>
+
+                </div>
+
+            </article>
+
+        {% empty %}
+
+            <div class="empty-state">
+
+                <span class="section-label">
+                    RESOURCES
+                </span>
+
+                <h2>
+                    Resources are coming soon.
+                </h2>
+
+                <p>
+                    I'm preparing practical guides, tutorials,
+                    cheat sheets and development resources.
+                </p>
+
+            </div>
+
+        {% endfor %}
+
+    </div>
+
+
+    {% if is_paginated %}
+
+        <div class="pagination">
+
+            {% if page_obj.has_previous %}
+
+                <a
+                    href="?page={{ page_obj.previous_page_number }}"
+                >
+                    ← Previous
+                </a>
+
+            {% endif %}
+
+
+            <span>
+                Page {{ page_obj.number }}
+                of {{ page_obj.paginator.num_pages }}
+            </span>
+
+
+            {% if page_obj.has_next %}
+
+                <a
+                    href="?page={{ page_obj.next_page_number }}"
+                >
+                    Next →
+                </a>
+
+            {% endif %}
+
+        </div>
+
+    {% endif %}
+
+</section>
+
+{% endblock %}

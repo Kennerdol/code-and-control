@@ -1,0 +1,179 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+    Courses | Code & Control
+{% endblock %}
+
+
+{% block content %}
+
+<section class="page-header">
+
+    <div class="page-header-container">
+
+        <span class="section-label">
+            LEARN WITH CODE & CONTROL
+        </span>
+
+        <h1>
+            Learn.
+            Build.
+            Create.
+        </h1>
+
+        <p>
+            Practical courses designed to help you move
+            from theory to building real software,
+            automation and technology projects.
+        </p>
+
+    </div>
+
+</section>
+
+
+<section class="section courses-section">
+
+    <div class="section-heading">
+
+        <span class="section-label">
+            COURSES
+        </span>
+
+        <h2>
+            Learn By Building.
+        </h2>
+
+        <p>
+            Explore practical courses covering software
+            development, databases, automation and
+            embedded systems.
+        </p>
+
+    </div>
+
+
+    <div class="courses-grid">
+
+        {% for course in courses %}
+
+            <article class="course-card">
+
+                <div class="course-image">
+
+                    {% if course.featured_image %}
+
+                        <img
+                            src="{{ course.featured_image.url }}"
+                            alt="{{ course.title }}"
+                        >
+
+                    {% else %}
+
+                        <div class="course-placeholder">
+                            {{ course.technology|default:"CODE" }}
+                        </div>
+
+                    {% endif %}
+
+                </div>
+
+
+                <div class="course-content">
+
+                    <div class="course-meta">
+
+                        <span>
+                            {{ course.get_level_display }}
+                        </span>
+
+                        {% if course.duration %}
+                            <span>
+                                {{ course.duration }}
+                            </span>
+                        {% endif %}
+
+                    </div>
+
+
+                    <h3>
+                        {{ course.title }}
+                    </h3>
+
+
+                    <p>
+                        {{ course.short_description }}
+                    </p>
+
+
+                    {% if course.technology %}
+
+                        <div class="course-technology">
+                            {{ course.technology }}
+                        </div>
+
+                    {% endif %}
+
+
+                    <a
+                        href="{{ course.get_absolute_url }}"
+                        class="course-link"
+                    >
+                        View Course →
+                    </a>
+
+                </div>
+
+            </article>
+
+        {% empty %}
+
+            <div class="empty-courses">
+
+                <span class="section-label">
+                    COMING SOON
+                </span>
+
+                <h3>
+                    Courses are being prepared.
+                </h3>
+
+                <p>
+                    Practical courses are currently being
+                    developed. Check back soon.
+                </p>
+
+            </div>
+
+        {% endfor %}
+
+    </div>
+
+</section>
+
+
+<section class="skills-philosophy">
+
+    <div class="skills-philosophy-container">
+
+        <span class="section-label">
+            THE LEARNING PHILOSOPHY
+        </span>
+
+        <h2>
+            Don't just watch.
+            Build.
+        </h2>
+
+        <p>
+            Every course will focus on practical knowledge,
+            real projects and understanding how the pieces
+            work together.
+        </p>
+
+    </div>
+
+</section>
+
+{% endblock %}

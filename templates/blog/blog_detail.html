@@ -1,0 +1,172 @@
+{% extends "base.html" %}
+
+{% block title %}
+{{ post.title }} | Code & Control
+{% endblock %}
+
+
+{% block content %}
+
+<!-- ================= ARTICLE HEADER ================= -->
+
+<section class="page-header">
+
+    <div class="page-header-container">
+
+        {% if post.category %}
+
+        <span class="section-label">
+            {{ post.category.name|upper }}
+        </span>
+
+        {% endif %}
+
+
+        <h1>
+            {{ post.title }}
+        </h1>
+
+
+        <p>
+            {{ post.excerpt }}
+        </p>
+
+
+        <div class="article-date">
+
+            Published
+            {{ post.created_at|date:"F d, Y" }}
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= ARTICLE ================= -->
+
+<section class="section">
+
+    <article class="blog-detail">
+
+
+        {% if post.featured_image %}
+
+        <div class="blog-detail-image">
+
+            <img src="{{ post.featured_image.url }}" alt="{{ post.title }}">
+
+        </div>
+
+        {% endif %}
+
+
+        <div class="blog-detail-content">
+
+            {{ post.content|linebreaks }}
+
+        </div>
+
+        <!--  RELATED -->
+
+
+        {% if post.related_project %}
+
+        <section class="related-content">
+
+            <span class="section-label">
+                RELATED PROJECT
+            </span>
+
+            <div class="related-card">
+
+                <div>
+
+                    <span class="related-type">
+                        PROJECT
+                    </span>
+
+                    <h3>
+                        {{ post.related_project.title }}
+                    </h3>
+
+                    <p>
+                        {{ post.related_project.short_description }}
+                    </p>
+
+                </div>
+
+                <a href="{{ post.related_project.get_absolute_url }}" class="resource-link">
+                    View Project →
+                </a>
+
+            </div>
+
+        </section>
+
+        {% endif %}
+
+
+
+        {% if post.related_resources.all %}
+
+        <section class="related-content">
+
+            <span class="section-label">
+                RELATED RESOURCES
+            </span>
+
+            <div class="related-resources">
+
+                {% for resource in post.related_resources.all %}
+
+                <div class="related-card">
+
+                    <div>
+
+                        <span class="related-type">
+                            {{ resource.get_category_display }}
+                        </span>
+
+                        <h3>
+                            {{ resource.title }}
+                        </h3>
+
+                        <p>
+                            {{ resource.short_description }}
+                        </p>
+
+                    </div>
+
+                    <a href="{{ resource.get_absolute_url }}" class="resource-link">
+                        View Resource →
+                    </a>
+
+                </div>
+
+                {% endfor %}
+
+            </div>
+
+        </section>
+
+        {% endif %}
+
+
+
+        <!-- ================= BACK TO BLOG ================= -->
+
+        <div class="project-actions">
+
+            <a href="{% url 'blog_list' %}" class="btn btn-outline">
+                ← Back to Blog
+            </a>
+
+        </div>
+
+    </article>
+
+</section>
+
+{% endblock %}

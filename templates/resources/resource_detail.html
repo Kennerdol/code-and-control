@@ -1,0 +1,155 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block title %}
+    {{ resource.title }} | Code & Control
+{% endblock %}
+
+
+{% block content %}
+
+<section class="page-header">
+
+    <div class="page-header-container">
+
+        <span class="section-label">
+            {{ resource.get_category_display }}
+        </span>
+
+        <h1>
+            {{ resource.title }}
+        </h1>
+
+        <p>
+            {{ resource.short_description }}
+        </p>
+
+    </div>
+
+</section>
+
+
+<section class="section">
+
+    <div class="resource-detail">
+
+        {% if resource.featured_image %}
+
+            <div class="resource-detail-image">
+
+                <img
+                    src="{{ resource.featured_image.url }}"
+                    alt="{{ resource.title }}"
+                >
+
+            </div>
+
+        {% endif %}
+
+
+        <div class="resource-detail-grid">
+
+            <main class="resource-detail-content">
+
+                <span class="section-label">
+                    ABOUT THIS RESOURCE
+                </span>
+
+                <div class="resource-description">
+
+                    {{ resource.description|linebreaks }}
+
+                </div>
+
+
+                <div class="resource-information">
+
+                    <div>
+
+                        <span>
+                            Category
+                        </span>
+
+                        <strong>
+                            {{ resource.get_category_display }}
+                        </strong>
+
+                    </div>
+
+
+                    <div>
+
+                        <span>
+                            Type
+                        </span>
+
+                        <strong>
+                            {{ resource.get_resource_type_display }}
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </main>
+
+
+            <aside class="resource-sidebar">
+
+                <div class="resource-action-card">
+
+                    <span class="section-label">
+                        RESOURCE
+                    </span>
+
+
+                    {% if resource.file %}
+
+                        <a
+                            href="{{ resource.file.url }}"
+                            class="btn btn-primary"
+                            download
+                        >
+                            Download Resource ↓
+                        </a>
+
+                    {% elif resource.external_url %}
+
+                        <a
+                            href="{{ resource.external_url }}"
+                            class="btn btn-primary"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            Open Resource →
+                        </a>
+
+                    {% else %}
+
+                        <span class="resource-unavailable">
+                            Resource currently unavailable.
+                        </span>
+
+                    {% endif %}
+
+                </div>
+
+            </aside>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<section class="section resource-navigation">
+
+    <a href="{% url 'resource_list' %}">
+        ← Back to Resources
+    </a>
+
+</section>
+
+{% endblock %}

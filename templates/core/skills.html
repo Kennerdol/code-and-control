@@ -1,0 +1,302 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+    Skills | Code & Control
+{% endblock %}
+
+
+{% block content %}
+
+<!-- =========================================================
+     PAGE HEADER
+     ========================================================= -->
+
+<section class="page-header">
+
+    <div class="page-header-container">
+
+        <span class="section-label">
+            SKILLS & EXPERTISE
+        </span>
+
+        <h1>
+            Code.
+            Control.
+            Build.
+        </h1>
+
+        <p>
+            A multidisciplinary skill set combining software
+            development, industrial automation, embedded systems
+            and data.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     SOFTWARE DEVELOPMENT
+     ========================================================= -->
+
+<section class="section skills-section">
+
+    <div class="section-heading">
+
+        <span class="section-label">
+            01 / SOFTWARE
+        </span>
+
+        <h2>
+            Software Development
+        </h2>
+
+        <p>
+            Building practical applications across web,
+            mobile, desktop and backend environments.
+        </p>
+
+    </div>
+
+
+    <div class="skills-grid">
+
+        {% for skill in software_skills %}
+
+            <article class="skill-card">
+
+                <div class="skill-number">
+                    {{ forloop.counter|stringformat:"02d" }}
+                </div>
+
+                <div class="skill-card-content">
+
+                    <h3>
+                        {{ skill.name }}
+                    </h3>
+
+                    <p>
+                        {{ skill.description }}
+                    </p>
+
+                    {% if skill.level %}
+                        <span class="skill-level">
+                            {{ skill.level }}
+                        </span>
+                    {% endif %}
+
+                </div>
+
+            </article>
+
+        {% endfor %}
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     INDUSTRIAL AUTOMATION
+     ========================================================= -->
+
+<section class="section skills-section skills-dark">
+
+    <div class="section-heading">
+
+        <span class="section-label">
+            02 / AUTOMATION
+        </span>
+
+        <h2>
+            Industrial Automation
+        </h2>
+
+        <p>
+            Connecting software, control systems, instrumentation
+            and industrial processes.
+        </p>
+
+    </div>
+
+
+    <div class="skills-grid">
+
+        {% for skill in automation_skills %}
+
+            <article class="skill-card">
+
+                <div class="skill-number">
+                    {{ forloop.counter|stringformat:"02d" }}
+                </div>
+
+                <div class="skill-card-content">
+
+                    <h3>
+                        {{ skill.name }}
+                    </h3>
+
+                    <p>
+                        {{ skill.description }}
+                    </p>
+
+                </div>
+
+            </article>
+
+        {% endfor %}
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     EMBEDDED SYSTEMS
+     ========================================================= -->
+
+<section class="section skills-section">
+
+    <div class="section-heading">
+
+        <span class="section-label">
+            03 / EMBEDDED
+        </span>
+
+        <h2>
+            Embedded Systems
+        </h2>
+
+        <p>
+            Exploring the layer where software interacts directly
+            with hardware.
+        </p>
+
+    </div>
+
+
+    <div class="skills-grid">
+
+        {% for skill in embedded_skills %}
+
+            <article class="skill-card">
+
+                <div class="skill-number">
+                    {{ forloop.counter|stringformat:"02d" }}
+                </div>
+
+                <div class="skill-card-content">
+
+                    <h3>
+                        {{ skill.name }}
+                    </h3>
+
+                    <p>
+                        {{ skill.description }}
+                    </p>
+
+                </div>
+
+            </article>
+
+        {% endfor %}
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     DATA & ANALYTICS
+     ========================================================= -->
+
+<section class="section skills-section skills-dark">
+
+    <div class="section-heading">
+
+        <span class="section-label">
+            04 / DATA
+        </span>
+
+        <h2>
+            Data & Analytics
+        </h2>
+
+        <p>
+            Turning data into information that can support
+            better decisions.
+        </p>
+
+    </div>
+
+
+    <div class="skills-grid">
+
+        {% for skill in data_skills %}
+
+            <article class="skill-card">
+
+                <div class="skill-number">
+                    {{ forloop.counter|stringformat:"02d" }}
+                </div>
+
+                <div class="skill-card-content">
+
+                    <h3>
+                        {{ skill.name }}
+                    </h3>
+
+                    <p>
+                        {{ skill.description }}
+                    </p>
+
+                </div>
+
+            </article>
+
+        {% endfor %}
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     PHILOSOPHY
+     ========================================================= -->
+
+<section class="section skills-philosophy">
+
+    <div class="skills-philosophy-container">
+
+        <span class="section-label">
+            THE CODE & CONTROL APPROACH
+        </span>
+
+        <h2>
+            I don't just learn
+            technologies.
+            I build with them.
+        </h2>
+
+        <p>
+            The goal is not to collect programming languages,
+            frameworks or tools. The goal is to understand
+            systems well enough to use the right technology
+            to solve the right problem.
+        </p>
+
+        <a
+            href="{% url 'project_list' %}"
+            class="btn btn-primary"
+        >
+            See What I've Built →
+        </a>
+
+    </div>
+
+</section>
+
+{% endblock %}

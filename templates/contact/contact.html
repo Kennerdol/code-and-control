@@ -1,0 +1,193 @@
+{% extends "base.html" %}
+
+
+{% block title %}
+    Contact | Code & Control
+{% endblock %}
+
+
+{% block content %}
+
+<section class="page-header">
+
+    <div class="page-header-container">
+
+        <span class="section-label">
+            GET IN TOUCH
+        </span>
+
+        <h1>
+            Let's Talk.
+        </h1>
+
+        <p>
+            Have a project, question, collaboration idea,
+            or simply want to say hello?
+        </p>
+
+    </div>
+
+</section>
+
+
+<section class="section">
+
+    <div class="contact-grid">
+
+        <div class="contact-intro">
+
+            <span class="section-label">
+                CONTACT
+            </span>
+
+            <h2>
+                Have an idea?
+                Let's build it.
+            </h2>
+
+            <p>
+                Whether you need help with software development,
+                automation, data or simply want to discuss an idea,
+                send me a message.
+            </p>
+
+
+            <div class="contact-details">
+
+                <div class="contact-detail">
+
+                    <span>
+                        EMAIL
+                    </span>
+
+                    <strong>
+                        kenny.t.mule.jnr@gmail.com
+                    </strong>
+
+                </div>
+
+
+                <div class="contact-detail">
+
+                    <span>
+                        LOCATION
+                    </span>
+
+                    <strong>
+                        Zambia
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="contact-form-wrapper">
+
+            {% if messages %}
+
+                {% for message in messages %}
+
+                    <div class="alert-success">
+                        {{ message }}
+                    </div>
+
+                {% endfor %}
+
+            {% endif %}
+
+
+            <form
+                method="post"
+                class="contact-form"
+            >
+
+                {% csrf_token %}
+
+
+                <div class="form-group">
+
+                    <label for="{{ form.name.id_for_label }}">
+                        Name
+                    </label>
+
+                    {{ form.name }}
+
+                    {% for error in form.name.errors %}
+                        <small class="form-error">
+                            {{ error }}
+                        </small>
+                    {% endfor %}
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="{{ form.email.id_for_label }}">
+                        Email
+                    </label>
+
+                    {{ form.email }}
+
+                    {% for error in form.email.errors %}
+                        <small class="form-error">
+                            {{ error }}
+                        </small>
+                    {% endfor %}
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="{{ form.subject.id_for_label }}">
+                        Subject
+                    </label>
+
+                    {{ form.subject }}
+
+                    {% for error in form.subject.errors %}
+                        <small class="form-error">
+                            {{ error }}
+                        </small>
+                    {% endfor %}
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="{{ form.message.id_for_label }}">
+                        Message
+                    </label>
+
+                    {{ form.message }}
+
+                    {% for error in form.message.errors %}
+                        <small class="form-error">
+                            {{ error }}
+                        </small>
+                    {% endfor %}
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="btn btn-primary"
+                >
+                    Send Message →
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}
