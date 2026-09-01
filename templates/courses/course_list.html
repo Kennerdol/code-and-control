@@ -17,15 +17,12 @@
         </span>
 
         <h1>
-            Learn.
-            Build.
-            Create.
+            Learn. Build. Grow.
         </h1>
 
         <p>
-            Practical courses designed to help you move
-            from theory to building real software,
-            automation and technology projects.
+            Practical courses designed to help you build
+            real-world technical skills.
         </p>
 
     </div>
@@ -33,54 +30,31 @@
 </section>
 
 
-<section class="section courses-section">
+<section class="section">
 
-    <div class="section-heading">
-
-        <span class="section-label">
-            COURSES
-        </span>
-
-        <h2>
-            Learn By Building.
-        </h2>
-
-        <p>
-            Explore practical courses covering software
-            development, databases, automation and
-            embedded systems.
-        </p>
-
-    </div>
-
-
-    <div class="courses-grid">
+    <div class="course-grid">
 
         {% for course in courses %}
 
             <article class="course-card">
 
-                <div class="course-image">
+                {% if course.featured_image %}
 
-                    {% if course.featured_image %}
+                    <img
+                        src="{{ course.featured_image.url }}"
+                        alt="{{ course.title }}"
+                    >
 
-                        <img
-                            src="{{ course.featured_image.url }}"
-                            alt="{{ course.title }}"
-                        >
+                {% else %}
 
-                    {% else %}
+                    <div class="course-placeholder">
+                        &lt;/&gt;
+                    </div>
 
-                        <div class="course-placeholder">
-                            {{ course.technology|default:"CODE" }}
-                        </div>
-
-                    {% endif %}
-
-                </div>
+                {% endif %}
 
 
-                <div class="course-content">
+                <div class="course-card-content">
 
                     <div class="course-meta">
 
@@ -89,17 +63,23 @@
                         </span>
 
                         {% if course.duration %}
+
+                            <span>
+                                •
+                            </span>
+
                             <span>
                                 {{ course.duration }}
                             </span>
+
                         {% endif %}
 
                     </div>
 
 
-                    <h3>
+                    <h2>
                         {{ course.title }}
-                    </h3>
+                    </h2>
 
 
                     <p>
@@ -107,18 +87,9 @@
                     </p>
 
 
-                    {% if course.technology %}
-
-                        <div class="course-technology">
-                            {{ course.technology }}
-                        </div>
-
-                    {% endif %}
-
-
                     <a
                         href="{{ course.get_absolute_url }}"
-                        class="course-link"
+                        class="resource-link"
                     >
                         View Course →
                     </a>
@@ -127,50 +98,27 @@
 
             </article>
 
+
         {% empty %}
 
-            <div class="empty-courses">
+            <div class="empty-state">
 
                 <span class="section-label">
-                    COMING SOON
+                    COURSES
                 </span>
 
-                <h3>
-                    Courses are being prepared.
-                </h3>
+                <h2>
+                    Courses are coming soon.
+                </h2>
 
                 <p>
-                    Practical courses are currently being
-                    developed. Check back soon.
+                    I'm currently preparing practical courses
+                    and tutorials. Check back soon.
                 </p>
 
             </div>
 
         {% endfor %}
-
-    </div>
-
-</section>
-
-
-<section class="skills-philosophy">
-
-    <div class="skills-philosophy-container">
-
-        <span class="section-label">
-            THE LEARNING PHILOSOPHY
-        </span>
-
-        <h2>
-            Don't just watch.
-            Build.
-        </h2>
-
-        <p>
-            Every course will focus on practical knowledge,
-            real projects and understanding how the pieces
-            work together.
-        </p>
 
     </div>
 

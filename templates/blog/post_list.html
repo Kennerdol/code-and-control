@@ -32,6 +32,92 @@
 
 <section class="section">
 
+
+    <!-- SEARCH -->
+
+    <div class="blog-search">
+
+        <form method="get">
+
+            <div class="search-wrapper">
+
+                <input
+                    type="text"
+                    name="q"
+                    value="{{ search_query }}"
+                    placeholder="Search articles..."
+                    class="search-input"
+                >
+
+                {% if selected_category %}
+
+                    <input
+                        type="hidden"
+                        name="category"
+                        value="{{ selected_category }}"
+                    >
+
+                {% endif %}
+
+                <button
+                    type="submit"
+                    class="search-button"
+                >
+                    Search
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+
+    <!-- CATEGORIES -->
+
+    <div class="blog-categories">
+
+        <a
+            href="{% url 'post_list' %}"
+            class="{% if not selected_category %}active{% endif %}"
+        >
+            All
+        </a>
+
+
+        {% for value, label in categories %}
+
+            <a
+                href="?category={{ value }}{% if search_query %}&q={{ search_query }}{% endif %}"
+                class="{% if selected_category == value %}active{% endif %}"
+            >
+                {{ label }}
+            </a>
+
+        {% endfor %}
+
+    </div>
+
+
+    <!-- SEARCH RESULT -->
+
+    {% if search_query %}
+
+        <div class="search-result-message">
+
+            Searching for:
+
+            <strong>
+                "{{ search_query }}"
+            </strong>
+
+        </div>
+
+    {% endif %}
+
+
+    <!-- POSTS -->
+
     <div class="blog-grid">
 
         {% for post in posts %}
@@ -50,7 +136,11 @@
                     {% else %}
 
                         <div class="blog-placeholder">
-                            <span>&lt;/&gt;</span>
+
+                            <span>
+                                &lt;/&gt;
+                            </span>
+
                         </div>
 
                     {% endif %}
@@ -66,7 +156,9 @@
                             {{ post.get_category_display }}
                         </span>
 
-                        <span>•</span>
+                        <span>
+                            •
+                        </span>
 
                         <span>
                             {{ post.created_at|date:"M d, Y" }}
@@ -96,6 +188,7 @@
 
             </article>
 
+
         {% empty %}
 
             <div class="empty-state">
@@ -105,13 +198,29 @@
                 </span>
 
                 <h2>
-                    Articles are coming soon.
+                    No articles found.
                 </h2>
 
                 <p>
-                    I'm working on tutorials, technical articles
-                    and project breakdowns.
+                    {% if search_query %}
+
+                        We couldn't find any articles matching
+                        "{{ search_query }}".
+
+                    {% else %}
+
+                        There are no published articles in
+                        this category yet.
+
+                    {% endif %}
                 </p>
+
+                <a
+                    href="{% url 'post_list' %}"
+                    class="resource-link"
+                >
+                    View All Articles →
+                </a>
 
             </div>
 
@@ -120,13 +229,17 @@
     </div>
 
 
+    <!-- PAGINATION -->
+
     {% if is_paginated %}
 
         <div class="pagination">
 
             {% if page_obj.has_previous %}
 
-                <a href="?page={{ page_obj.previous_page_number }}">
+                <a
+                    href="?page={{ page_obj.previous_page_number }}{% if search_query %}&q={{ search_query }}{% endif %}{% if selected_category %}&category={{ selected_category }}{% endif %}"
+                >
                     ← Previous
                 </a>
 
@@ -141,7 +254,9 @@
 
             {% if page_obj.has_next %}
 
-                <a href="?page={{ page_obj.next_page_number }}">
+                <a
+                    href="?page={{ page_obj.next_page_number }}{% if search_query %}&q={{ search_query }}{% endif %}{% if selected_category %}&category={{ selected_category }}{% endif %}"
+                >
                     Next →
                 </a>
 
@@ -150,6 +265,7 @@
         </div>
 
     {% endif %}
+
 
 </section>
 

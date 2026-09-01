@@ -1,0 +1,155 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block title %}
+    My Learning | Code & Control
+{% endblock %}
+
+
+{% block content %}
+
+<section class="page-header">
+
+    <div class="page-header-container">
+
+        <span class="section-label">
+            MY LEARNING
+        </span>
+
+        <h1>
+            Welcome, {{ user.first_name }}.
+        </h1>
+
+        <p>
+            Your learning journey starts here.
+        </p>
+
+    </div>
+
+</section>
+
+
+<section class="section">
+
+    <div class="dashboard-container">
+
+        <div class="dashboard-section">
+
+            <div class="dashboard-section-header">
+
+                <div>
+
+                    <span class="section-label">
+                        MY LEARNING
+                    </span>
+
+                    <h2>
+                        Your Courses
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <div class="dashboard-course-grid">
+
+                {% for enrollment in enrollments %}
+
+                    <article class="dashboard-course-card">
+
+                        {% if enrollment.course.featured_image %}
+
+                            <img
+                                src="{{ enrollment.course.featured_image.url }}"
+                                alt="{{ enrollment.course.title }}"
+                            >
+
+                        {% else %}
+
+                            <div class="course-placeholder">
+                                &lt;/&gt;
+                            </div>
+
+                        {% endif %}
+
+
+                        <div class="dashboard-course-content">
+
+                            <span class="course-status">
+                                {{ enrollment.get_status_display }}
+                            </span>
+
+
+                            <h3>
+                                {{ enrollment.course.title }}
+                            </h3>
+
+
+                            <p>
+                                {{ enrollment.course.short_description }}
+                            </p>
+
+
+                            <a
+                                href="{{ enrollment.course.get_absolute_url }}"
+                                class="resource-link"
+                            >
+                                View Course →
+                            </a>
+
+                        </div>
+
+                    </article>
+
+                {% empty %}
+
+                    <div class="dashboard-empty">
+
+                        <h3>
+                            You haven't enrolled in any courses yet.
+                        </h3>
+
+                        <p>
+                            Explore our courses and start building
+                            your skills.
+                        </p>
+
+                        <a
+                            href="{% url 'course_list' %}"
+                            class="btn btn-primary"
+                        >
+                            Browse Courses →
+                        </a>
+
+                    </div>
+
+                {% endfor %}
+
+            </div>
+
+        </div>
+
+
+        <div class="dashboard-card">
+
+            <span class="section-label">
+                ACCOUNT
+            </span>
+
+            <h2>
+                Profile
+            </h2>
+
+            <p>
+                {{ user.email }}
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

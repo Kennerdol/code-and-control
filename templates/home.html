@@ -1,746 +1,799 @@
 {% extends "base.html" %}
 
-{% block title %}
-    Code & Control | Where Software Meets Automation
-{% endblock %}
+    {% block title %}
+        Code & Control | Where Software Meets Automation
+    {% endblock %}
 
 
-{% block content %}
+    {% block content %}
 
-<!-- =========================================================
-     HERO
-     ========================================================= -->
+    <!-- =========================================================
+        HERO
+        ========================================================= -->
 
-<section class="hero">
+    <section class="hero">
 
-    <div class="hero-container">
+        <div class="hero-container">
 
-        <div class="hero-content">
+            <div class="hero-content">
 
-            <div class="hero-eyebrow">
-                SOFTWARE • AUTOMATION • DATA
-            </div>
+                <div class="hero-eyebrow">
+                    SOFTWARE • AUTOMATION • DATA
+                </div>
 
-            <h1>
-                Where
-                <span>Software</span>
-                Meets Control.
-            </h1>
+                <h1>
+                    Where
+                    <span>Software</span>
+                    Meets Control.
+                </h1>
 
-            <p class="hero-description">
-                I build software, automation systems and
-                data-driven solutions that connect the
-                digital world with the physical one.
-            </p>
+                <p class="hero-description">
+                    I build software, automation systems and
+                    data-driven solutions that connect the
+                    digital world with the physical one.
+                </p>
 
-            <div class="hero-buttons">
+                <div class="hero-buttons">
 
-                <a
-                    href="{% url 'project_list' %}"
-                    class="btn btn-primary"
-                >
-                    Explore My Work →
-                </a>
+                    <a
+                        href="{% url 'project_list' %}"
+                        class="btn btn-primary"
+                    >
+                        Explore My Work →
+                    </a>
 
-                <a
-                    href="{% url 'about' %}"
-                    class="btn btn-outline"
-                >
-                    About Me
-                </a>
-
-            </div>
-
-            <div class="hero-technologies">
-
-                <span>Python</span>
-                <span>Django</span>
-                <span>Flutter</span>
-                <span>SQL</span>
-                <span>PLC</span>
-                <span>SCADA</span>
-                <span>Embedded</span>
-
-            </div>
-
-        </div>
-
-
-        <!-- HERO SYSTEM CARD -->
-
-        <div class="hero-visual">
-
-            <div class="system-card">
-
-                <div class="system-header">
-
-                    <span class="status-dot"></span>
-
-                    SYSTEM PROFILE
-
-                    <span class="online">
-                        ONLINE
-                    </span>
+                    <a
+                        href="{% url 'about' %}"
+                        class="btn btn-outline"
+                    >
+                        About Me
+                    </a>
 
                 </div>
 
+                <div class="hero-technologies">
 
-                <div class="system-body">
-
-                    <div class="system-line">
-
-                        <span>
-                            SOFTWARE
-                        </span>
-
-                        <strong>
-                            DEVELOPMENT
-                        </strong>
-
-                    </div>
-
-
-                    <div class="system-line">
-
-                        <span>
-                            AUTOMATION
-                        </span>
-
-                        <strong>
-                            INDUSTRIAL
-                        </strong>
-
-                    </div>
-
-
-                    <div class="system-line">
-
-                        <span>
-                            DATA
-                        </span>
-
-                        <strong>
-                            ANALYTICS
-                        </strong>
-
-                    </div>
-
-
-                    <div class="system-line">
-
-                        <span>
-                            EMBEDDED
-                        </span>
-
-                        <strong>
-                            SYSTEMS
-                        </strong>
-
-                    </div>
-
-
-                    <div class="system-line">
-
-                        <span>
-                            STATUS
-                        </span>
-
-                        <strong>
-                            BUILDING
-                        </strong>
-
-                    </div>
+                    <span>Python</span>
+                    <span>Django</span>
+                    <span>Flutter</span>
+                    <span>SQL</span>
+                    <span>PLC</span>
+                    <span>SCADA</span>
+                    <span>Embedded</span>
 
                 </div>
 
             </div>
 
 
-            <div class="code-decoration">
+            <!-- HERO SYSTEM CARD -->
 
-                <span>{ }</span>
+            <div class="hero-visual">
 
-                <span>&lt;/&gt;</span>
+                <div class="system-card">
 
-                <span>01</span>
+                    <div class="system-header">
 
-            </div>
+                        <span class="status-dot"></span>
 
-        </div>
+                        SYSTEM PROFILE
 
-    </div>
+                        <span class="online">
+                            ONLINE
+                        </span>
 
-</section>
+                    </div>
 
 
-<!-- =========================================================
-     WHAT I DO
-     ========================================================= -->
+                    <div class="system-body">
 
-<section class="section">
+                        <div class="system-line">
 
-    <div class="section-heading">
+                            <span>
+                                SOFTWARE
+                            </span>
 
-        <span class="section-label">
-            WHAT I DO
-        </span>
+                            <strong>
+                                DEVELOPMENT
+                            </strong>
 
-        <h2>
-            Building Across
-            Multiple Layers.
-        </h2>
-
-        <p>
-            From software applications to industrial
-            control systems, I work across the boundary
-            between code and machines.
-        </p>
-
-    </div>
-
-
-    <div class="services-grid">
-
-
-        <!-- SOFTWARE -->
-
-        <article class="service-card">
-
-            <div class="service-icon">
-                &lt;/&gt;
-            </div>
-
-            <h3>
-                Software Development
-            </h3>
-
-            <p>
-                Building web, desktop and mobile
-                applications designed to solve
-                practical problems.
-            </p>
-
-            <div class="service-tech">
-                Python • Django • C# • Flutter
-            </div>
-
-        </article>
-
-
-        <!-- AUTOMATION -->
-
-        <article class="service-card">
-
-            <div class="service-icon">
-                ⚙
-            </div>
-
-            <h3>
-                Industrial Automation
-            </h3>
-
-            <p>
-                Developing and working with PLC,
-                HMI, SCADA and instrumentation
-                systems.
-            </p>
-
-            <div class="service-tech">
-                Siemens • PLC • HMI • SCADA
-            </div>
-
-        </article>
-
-
-        <!-- DATA -->
-
-        <article class="service-card">
-
-            <div class="service-icon">
-                ◫
-            </div>
-
-            <h3>
-                Data & Analytics
-            </h3>
-
-            <p>
-                Turning operational data into
-                useful information for better
-                decisions.
-            </p>
-
-            <div class="service-tech">
-                SQL • Power BI • Excel • Python
-            </div>
-
-        </article>
-
-
-        <!-- EMBEDDED -->
-
-        <article class="service-card">
-
-            <div class="service-icon">
-                ◉
-            </div>
-
-            <h3>
-                Embedded Systems
-            </h3>
-
-            <p>
-                Exploring microcontrollers,
-                firmware and systems that connect
-                software to hardware.
-            </p>
-
-            <div class="service-tech">
-                STM32 • ESP32 • C • Electronics
-            </div>
-
-        </article>
-
-    </div>
-
-</section>
-
-
-<!-- =========================================================
-     FEATURED PROJECTS
-     ========================================================= -->
-
-<section class="section projects">
-
-    <div class="section-heading section-heading-row">
-
-        <div>
-
-            <span class="section-label">
-                FEATURED PROJECTS
-            </span>
-
-            <h2>
-                Things I've Built.
-            </h2>
-
-        </div>
-
-
-        <a
-            href="{% url 'project_list' %}"
-            class="view-all"
-        >
-            View All Projects →
-        </a>
-
-    </div>
-
-
-    <div class="projects-grid">
-
-        {% for project in featured_projects %}
-
-            <article class="project-card">
-
-                <div class="project-image">
-
-                    {% if project.featured_image %}
-
-                        <img
-                            src="{{ project.featured_image.url }}"
-                            alt="{{ project.title }}"
-                        >
-
-                    {% else %}
-
-                        <div class="project-symbol">
-                            &lt;/&gt;
                         </div>
 
-                    {% endif %}
+
+                        <div class="system-line">
+
+                            <span>
+                                AUTOMATION
+                            </span>
+
+                            <strong>
+                                INDUSTRIAL
+                            </strong>
+
+                        </div>
 
 
-                    <span class="project-tag">
-                        {{ project.get_project_type_display }}
-                    </span>
+                        <div class="system-line">
 
-                </div>
+                            <span>
+                                DATA
+                            </span>
+
+                            <strong>
+                                ANALYTICS
+                            </strong>
+
+                        </div>
 
 
-                <div class="project-content">
+                        <div class="system-line">
 
-                    <div class="project-category">
-                        {{ project.technologies }}
+                            <span>
+                                EMBEDDED
+                            </span>
+
+                            <strong>
+                                SYSTEMS
+                            </strong>
+
+                        </div>
+
+
+                        <div class="system-line">
+
+                            <span>
+                                STATUS
+                            </span>
+
+                            <strong>
+                                BUILDING
+                            </strong>
+
+                        </div>
+
                     </div>
 
-
-                    <h3>
-                        {{ project.title }}
-                    </h3>
-
-
-                    <p>
-                        {{ project.short_description }}
-                    </p>
-
-
-                    <a
-                        href="{{ project.get_absolute_url }}"
-                    >
-                        View Project →
-                    </a>
-
-                </div>
-
-            </article>
-
-
-        {% empty %}
-
-            <!--
-                Temporary projects shown until
-                featured projects are added through
-                Django Admin.
-            -->
-
-
-            <!-- ZRIDE -->
-
-            <article class="project-card">
-
-                <div class="project-image project-zride">
-
-                    <div class="project-symbol">
-                        Z
-                    </div>
-
-                    <span class="project-tag">
-                        MOBILE
-                    </span>
-
                 </div>
 
 
-                <div class="project-content">
+                <div class="code-decoration">
 
-                    <div class="project-category">
-                        FLUTTER • FASTAPI
-                    </div>
+                    <span>{ }</span>
 
-                    <h3>
-                        ZRide
-                    </h3>
+                    <span>&lt;/&gt;</span>
 
-                    <p>
-                        A ride-hailing application designed
-                        to connect passengers and drivers.
-                    </p>
-
-                    <a
-                        href="{% url 'project_list' %}"
-                    >
-                        View Project →
-                    </a>
+                    <span>01</span>
 
                 </div>
 
-            </article>
+            </div>
+
+        </div>
+
+    </section>
 
 
-            <!-- PJ'S LINK ZAMBIA -->
+    <!-- =========================================================
+        WHAT I DO
+        ========================================================= -->
 
-            <article class="project-card">
+    <section class="section">
 
-                <div class="project-image project-pj">
-
-                    <div class="project-symbol">
-                        PJ
-                    </div>
-
-                    <span class="project-tag">
-                        MARKETPLACE
-                    </span>
-
-                </div>
-
-
-                <div class="project-content">
-
-                    <div class="project-category">
-                        DJANGO • FLUTTER
-                    </div>
-
-                    <h3>
-                        PJ's Link Zambia
-                    </h3>
-
-                    <p>
-                        A marketplace platform connecting
-                        clients, workers and opportunities.
-                    </p>
-
-                    <a
-                        href="{% url 'project_list' %}"
-                    >
-                        View Project →
-                    </a>
-
-                </div>
-
-            </article>
-
-
-            <!-- TASKTURER -->
-
-            <article class="project-card">
-
-                <div class="project-image project-task">
-
-                    <div class="project-symbol">
-                        T
-                    </div>
-
-                    <span class="project-tag">
-                        DESKTOP
-                    </span>
-
-                </div>
-
-
-                <div class="project-content">
-
-                    <div class="project-category">
-                        C# • WPF • MVVM
-                    </div>
-
-                    <h3>
-                        TaskTurer
-                    </h3>
-
-                    <p>
-                        A desktop task management application
-                        built using WPF and MVVM architecture.
-                    </p>
-
-                    <a
-                        href="{% url 'project_list' %}"
-                    >
-                        View Project →
-                    </a>
-
-                </div>
-
-            </article>
-
-        {% endfor %}
-
-    </div>
-
-</section>
-
-
-<!-- =========================================================
-     LEARNING
-     ========================================================= -->
-
-<section class="section learning">
-
-    <div class="learning-container">
-
-        <div>
+        <div class="section-heading">
 
             <span class="section-label">
-                LEARN WITH ME
+                WHAT I DO
             </span>
 
             <h2>
-                Don't Just Learn.
-                Build.
+                Building Across
+                Multiple Layers.
             </h2>
 
             <p>
-                Practical learning resources for people
-                who want to move beyond theory and start
-                building real software, automation and
-                embedded systems.
+                From software applications to industrial
+                control systems, I work across the boundary
+                between code and machines.
+            </p>
+
+        </div>
+
+
+        <div class="services-grid">
+
+
+            <!-- SOFTWARE -->
+
+            <article class="service-card">
+
+                <div class="service-icon">
+                    &lt;/&gt;
+                </div>
+
+                <h3>
+                    Software Development
+                </h3>
+
+                <p>
+                    Building web, desktop and mobile
+                    applications designed to solve
+                    practical problems.
+                </p>
+
+                <div class="service-tech">
+                    Python • Django • C# • Flutter
+                </div>
+
+            </article>
+
+
+            <!-- AUTOMATION -->
+
+            <article class="service-card">
+
+                <div class="service-icon">
+                    ⚙
+                </div>
+
+                <h3>
+                    Industrial Automation
+                </h3>
+
+                <p>
+                    Developing and working with PLC,
+                    HMI, SCADA and instrumentation
+                    systems.
+                </p>
+
+                <div class="service-tech">
+                    Siemens • PLC • HMI • SCADA
+                </div>
+
+            </article>
+
+
+            <!-- DATA -->
+
+            <article class="service-card">
+
+                <div class="service-icon">
+                    ◫
+                </div>
+
+                <h3>
+                    Data & Analytics
+                </h3>
+
+                <p>
+                    Turning operational data into
+                    useful information for better
+                    decisions.
+                </p>
+
+                <div class="service-tech">
+                    SQL • Power BI • Excel • Python
+                </div>
+
+            </article>
+
+
+            <!-- EMBEDDED -->
+
+            <article class="service-card">
+
+                <div class="service-icon">
+                    ◉
+                </div>
+
+                <h3>
+                    Embedded Systems
+                </h3>
+
+                <p>
+                    Exploring microcontrollers,
+                    firmware and systems that connect
+                    software to hardware.
+                </p>
+
+                <div class="service-tech">
+                    STM32 • ESP32 • C • Electronics
+                </div>
+
+            </article>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================================================
+        FEATURED PROJECTS
+        ========================================================= -->
+
+    <section class="section projects">
+
+        <div class="section-heading section-heading-row">
+
+            <div>
+
+                <span class="section-label">
+                    FEATURED PROJECTS
+                </span>
+
+                <h2>
+                    Things I've Built.
+                </h2>
+
+            </div>
+
+
+            <a
+                href="{% url 'project_list' %}"
+                class="view-all"
+            >
+                View All Projects →
+            </a>
+
+        </div>
+
+
+        <div class="projects-grid">
+
+            {% for project in featured_projects %}
+
+                <article class="project-card">
+
+                    <div class="project-image">
+
+                        {% if project.featured_image %}
+
+                            <img
+                                src="{{ project.featured_image.url }}"
+                                alt="{{ project.title }}"
+                            >
+
+                        {% else %}
+
+                            <div class="project-symbol">
+                                &lt;/&gt;
+                            </div>
+
+                        {% endif %}
+
+
+                        <span class="project-tag">
+                            {{ project.get_project_type_display }}
+                        </span>
+
+                    </div>
+
+
+                    <div class="project-content">
+
+                        <div class="project-category">
+                            {{ project.technologies }}
+                        </div>
+
+
+                        <h3>
+                            {{ project.title }}
+                        </h3>
+
+
+                        <p>
+                            {{ project.short_description }}
+                        </p>
+
+
+                        <a
+                            href="{{ project.get_absolute_url }}"
+                        >
+                            View Project →
+                        </a>
+
+                    </div>
+
+                </article>
+
+
+            {% empty %}
+
+                <!--
+                    Temporary projects shown until
+                    featured projects are added through
+                    Django Admin.
+                -->
+
+
+                <!-- ZRIDE -->
+
+                <article class="project-card">
+
+                    <div class="project-image project-zride">
+
+                        <div class="project-symbol">
+                            Z
+                        </div>
+
+                        <span class="project-tag">
+                            MOBILE
+                        </span>
+
+                    </div>
+
+
+                    <div class="project-content">
+
+                        <div class="project-category">
+                            FLUTTER • FASTAPI
+                        </div>
+
+                        <h3>
+                            ZRide
+                        </h3>
+
+                        <p>
+                            A ride-hailing application designed
+                            to connect passengers and drivers.
+                        </p>
+
+                        <a
+                            href="{% url 'project_list' %}"
+                        >
+                            View Project →
+                        </a>
+
+                    </div>
+
+                </article>
+
+
+                <!-- PJ'S LINK ZAMBIA -->
+
+                <article class="project-card">
+
+                    <div class="project-image project-pj">
+
+                        <div class="project-symbol">
+                            PJ
+                        </div>
+
+                        <span class="project-tag">
+                            MARKETPLACE
+                        </span>
+
+                    </div>
+
+
+                    <div class="project-content">
+
+                        <div class="project-category">
+                            DJANGO • FLUTTER
+                        </div>
+
+                        <h3>
+                            PJ's Link Zambia
+                        </h3>
+
+                        <p>
+                            A marketplace platform connecting
+                            clients, workers and opportunities.
+                        </p>
+
+                        <a
+                            href="{% url 'project_list' %}"
+                        >
+                            View Project →
+                        </a>
+
+                    </div>
+
+                </article>
+
+
+                <!-- TASKTURER -->
+
+                <article class="project-card">
+
+                    <div class="project-image project-task">
+
+                        <div class="project-symbol">
+                            T
+                        </div>
+
+                        <span class="project-tag">
+                            DESKTOP
+                        </span>
+
+                    </div>
+
+
+                    <div class="project-content">
+
+                        <div class="project-category">
+                            C# • WPF • MVVM
+                        </div>
+
+                        <h3>
+                            TaskTurer
+                        </h3>
+
+                        <p>
+                            A desktop task management application
+                            built using WPF and MVVM architecture.
+                        </p>
+
+                        <a
+                            href="{% url 'project_list' %}"
+                        >
+                            View Project →
+                        </a>
+
+                    </div>
+
+                </article>
+
+            {% endfor %}
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================================================
+        LEARNING
+        ========================================================= -->
+
+    <section class="section learning">
+
+        <div class="learning-container">
+
+            <div>
+
+                <span class="section-label">
+                    LEARN WITH ME
+                </span>
+
+                <h2>
+                    Don't Just Learn.
+                    Build.
+                </h2>
+
+                <p>
+                    Practical learning resources for people
+                    who want to move beyond theory and start
+                    building real software, automation and
+                    embedded systems.
+                </p>
+
+                <a
+                    href="#"
+                    class="btn btn-primary"
+                >
+                    Explore Courses →
+                </a>
+
+            </div>
+
+
+            <div class="learning-topics">
+
+                <div>
+                    PYTHON
+                </div>
+
+                <div>
+                    DJANGO
+                </div>
+
+                <div>
+                    SQL
+                </div>
+
+                <div>
+                    FLUTTER
+                </div>
+
+                <div>
+                    PLC
+                </div>
+
+                <div>
+                    STM32
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================================================
+        BLOG
+        ========================================================= -->
+
+    <section class="section">
+
+        <div class="section-heading">
+
+            <span class="section-label">
+                FROM THE BLOG
+            </span>
+
+            <h2>
+                Things I'm Learning.
+            </h2>
+
+            <p>
+                Notes, tutorials, experiments and lessons
+                from building software and working with
+                technology.
+            </p>
+
+        </div>
+
+
+        <div class="blog-grid">
+
+
+            <article class="blog-card">
+
+                <span>
+                    SOFTWARE DEVELOPMENT
+                </span>
+
+                <h3>
+                    Building My First Full-Stack Application
+                </h3>
+
+                <p>
+                    Lessons learned while designing,
+                    developing and connecting a modern
+                    application to a backend.
+                </p>
+
+                <a href="#">
+                    Read Article →
+                </a>
+
+            </article>
+
+
+            <article class="blog-card">
+
+                <span>
+                    AUTOMATION
+                </span>
+
+                <h3>
+                    When Software Meets Industrial Control
+                </h3>
+
+                <p>
+                    Exploring the relationship between
+                    programming, PLCs, instrumentation
+                    and industrial automation.
+                </p>
+
+                <a href="#">
+                    Read Article →
+                </a>
+
+            </article>
+
+
+            <article class="blog-card">
+
+                <span>
+                    EMBEDDED SYSTEMS
+                </span>
+
+                <h3>
+                    Learning STM32 From the Ground Up
+                </h3>
+
+                <p>
+                    My journey into microcontrollers,
+                    firmware development and bare-metal
+                    programming.
+                </p>
+
+                <a href="#">
+                    Read Article →
+                </a>
+
+            </article>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================================================
+        CTA
+        ========================================================= -->
+
+    <section class="section cta">
+
+        <div class="cta-container">
+
+            <span class="section-label">
+                HAVE AN IDEA?
+            </span>
+
+            <h2>
+                Let's Build
+                Something Useful.
+            </h2>
+
+            <p>
+                Have a project, collaboration or idea
+                you'd like to discuss?
             </p>
 
             <a
                 href="#"
                 class="btn btn-primary"
             >
-                Explore Courses →
+                Get In Touch →
             </a>
 
         </div>
 
+    </section>
 
-        <div class="learning-topics">
 
-            <div>
-                PYTHON
+    <section class="newsletter-section">
+
+        <div class="newsletter-container">
+
+            <div class="newsletter-content">
+
+                <span class="section-label">
+                    STAY CONNECTED
+                </span>
+
+                <h2>
+                    Build. Learn. Create.
+                </h2>
+
+                <p>
+                    Get new articles, tutorials, resources and
+                    course updates delivered to your inbox.
+                </p>
+
             </div>
 
-            <div>
-                DJANGO
-            </div>
 
-            <div>
-                SQL
-            </div>
+            <form
+                method="post"
+                action="{% url 'newsletter_subscribe' %}"
+                class="newsletter-form"
+            >
 
-            <div>
-                FLUTTER
-            </div>
+                {% csrf_token %}
 
-            <div>
-                PLC
-            </div>
 
-            <div>
-                STM32
-            </div>
+                <input
+                    type="email"
+                    name="email"
+                    placeholder="Your email address"
+                    required
+                >
+
+
+                <button
+                    type="submit"
+                    class="btn btn-primary"
+                >
+                    Subscribe
+                </button>
+
+            </form>
 
         </div>
 
-    </div>
-
-</section>
-
-
-<!-- =========================================================
-     BLOG
-     ========================================================= -->
-
-<section class="section">
-
-    <div class="section-heading">
-
-        <span class="section-label">
-            FROM THE BLOG
-        </span>
-
-        <h2>
-            Things I'm Learning.
-        </h2>
-
-        <p>
-            Notes, tutorials, experiments and lessons
-            from building software and working with
-            technology.
-        </p>
-
-    </div>
-
-
-    <div class="blog-grid">
-
-
-        <article class="blog-card">
-
-            <span>
-                SOFTWARE DEVELOPMENT
-            </span>
-
-            <h3>
-                Building My First Full-Stack Application
-            </h3>
-
-            <p>
-                Lessons learned while designing,
-                developing and connecting a modern
-                application to a backend.
-            </p>
-
-            <a href="#">
-                Read Article →
-            </a>
-
-        </article>
-
-
-        <article class="blog-card">
-
-            <span>
-                AUTOMATION
-            </span>
-
-            <h3>
-                When Software Meets Industrial Control
-            </h3>
-
-            <p>
-                Exploring the relationship between
-                programming, PLCs, instrumentation
-                and industrial automation.
-            </p>
-
-            <a href="#">
-                Read Article →
-            </a>
-
-        </article>
-
-
-        <article class="blog-card">
-
-            <span>
-                EMBEDDED SYSTEMS
-            </span>
-
-            <h3>
-                Learning STM32 From the Ground Up
-            </h3>
-
-            <p>
-                My journey into microcontrollers,
-                firmware development and bare-metal
-                programming.
-            </p>
-
-            <a href="#">
-                Read Article →
-            </a>
-
-        </article>
-
-    </div>
-
-</section>
-
-
-<!-- =========================================================
-     CTA
-     ========================================================= -->
-
-<section class="section cta">
-
-    <div class="cta-container">
-
-        <span class="section-label">
-            HAVE AN IDEA?
-        </span>
-
-        <h2>
-            Let's Build
-            Something Useful.
-        </h2>
-
-        <p>
-            Have a project, collaboration or idea
-            you'd like to discuss?
-        </p>
-
-        <a
-            href="#"
-            class="btn btn-primary"
-        >
-            Get In Touch →
-        </a>
-
-    </div>
-
-</section>
+    </section>
 
 {% endblock %}

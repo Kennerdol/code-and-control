@@ -13,7 +13,7 @@
     <div class="page-header-container">
 
         <span class="section-label">
-            COURSE
+            {{ course.get_level_display }}
         </span>
 
         <h1>
@@ -33,70 +33,86 @@
 
     <div class="course-detail">
 
-        {% if course.featured_image %}
+        <div class="course-main">
 
-            <img
-                src="{{ course.featured_image.url }}"
-                alt="{{ course.title }}"
-                class="course-detail-image"
-            >
+            {% if course.featured_image %}
 
-        {% endif %}
+                <img
+                    src="{{ course.featured_image.url }}"
+                    alt="{{ course.title }}"
+                    class="course-detail-image"
+                >
+
+            {% endif %}
 
 
-        <div class="course-detail-grid">
-
-
-            <!-- COURSE INFORMATION -->
-
-            <div class="course-detail-content">
+            <section class="course-section">
 
                 <span class="section-label">
-                    ABOUT THIS COURSE
+                    ABOUT THE COURSE
                 </span>
 
-                <h2>
-                    {{ course.title }}
-                </h2>
+                <div class="course-text">
 
-                <p>
-                    {{ course.description }}
-                </p>
-
-            </div>
-
-
-            <!-- COURSE CARD -->
-
-            <aside class="course-enrol-card">
-
-                <div class="course-enrol-header">
-
-                    <span>
-                        COURSE INFORMATION
-                    </span>
+                    {{ course.description|linebreaks }}
 
                 </div>
 
+            </section>
 
-                <div class="course-enrol-body">
 
-                    <div class="course-info-row">
+            {% if course.curriculum %}
 
-                        <span>
-                            Level
-                        </span>
+                <section class="course-section">
 
-                        <strong>
-                            {{ course.get_level_display }}
-                        </strong>
+                    <span class="section-label">
+                        CURRICULUM
+                    </span>
+
+                    <div class="course-text">
+
+                        {{ course.curriculum|linebreaks }}
 
                     </div>
 
+                </section>
 
-                    {% if course.duration %}
+            {% endif %}
 
-                    <div class="course-info-row">
+
+            {% if course.requirements %}
+
+                <section class="course-section">
+
+                    <span class="section-label">
+                        REQUIREMENTS
+                    </span>
+
+                    <div class="course-text">
+
+                        {{ course.requirements|linebreaks }}
+
+                    </div>
+
+                </section>
+
+            {% endif %}
+
+        </div>
+
+
+        <aside class="course-sidebar">
+
+            <div class="course-enrollment-card">
+
+                <span class="section-label">
+                    COURSE DETAILS
+                </span>
+
+
+                {% if course.duration %}
+
+                    <div class="course-info">
 
                         <span>
                             Duration
@@ -108,99 +124,45 @@
 
                     </div>
 
-                    {% endif %}
+                {% endif %}
 
 
-                    {% if course.technology %}
+                <div class="course-info">
 
-                    <div class="course-info-row">
+                    <span>
+                        Level
+                    </span>
 
-                        <span>
-                            Technology
-                        </span>
-
-                        <strong>
-                            {{ course.technology }}
-                        </strong>
-
-                    </div>
-
-                    {% endif %}
-
-
-                    <div class="course-info-row">
-
-                        <span>
-                            Instructor
-                        </span>
-
-                        <strong>
-                            {{ course.instructor }}
-                        </strong>
-
-                    </div>
-
-
-                    <a
-                        href="#"
-                        class="btn btn-primary course-enrol-button"
-                    >
-                        Enrol Now →
-                    </a>
+                    <strong>
+                        {{ course.get_level_display }}
+                    </strong>
 
                 </div>
 
-            </aside>
 
-        </div>
+                <div class="course-info">
 
-    </div>
+                    <span>
+                        Instructor
+                    </span>
 
-</section>
+                    <strong>
+                        {{ course.instructor }}
+                    </strong>
 
-
-<section class="section learning">
-
-    <div class="learning-container">
-
-        <div>
-
-            <span class="section-label">
-                READY TO BUILD?
-            </span>
-
-            <h2>
-                Start Learning.
-            </h2>
-
-            <p>
-                Follow the course, build the projects and
-                develop the skills needed to create your
-                own solutions.
-            </p>
-
-        </div>
+                </div>
 
 
-        <div class="learning-topics">
+                <a
+                    href="{% url 'course_enroll' course.slug %}"
+                    class="btn btn-primary course-enroll-button"
+                >
+                    Enrol Now →
+                </a>
 
-            <div>
-                PRACTICAL
             </div>
 
-            <div>
-                PROJECT BASED
-            </div>
-
-            <div>
-                STEP BY STEP
-            </div>
-
-            <div>
-                REAL WORLD
-            </div>
-
-        </div>
+        </aside>
 
     </div>
 
