@@ -3,10 +3,11 @@ from django.contrib.auth import login, logout
 from django.contrib.auth.views import LoginView
 from django.shortcuts import redirect
 from django.views.generic import CreateView, TemplateView
+from django.contrib.auth.mixins import LoginRequiredMixin
 
+from accounts.models import StudentProfile
 from courses.models import Enrollment
-
-from .forms import LoginForm, RegisterForm
+from .forms import *
 
 
 class RegisterView(CreateView):
@@ -97,3 +98,87 @@ class LogoutView(TemplateView):
         )
 
         return redirect("home")
+
+
+
+class StudentProfileView(LoginRequiredMixin, TemplateView):
+
+    template_name = "accounts/profile.html"
+
+    def get_context_data(self, **kwargs):
+
+        context = super().get_context_data(**kwargs)
+
+        profile, created = StudentProfile.objects.get_or_create(
+            user=self.request.user
+        )
+
+        context["profile"] = profile
+
+        return context
+    
+
+class StudentProfileUpdateView(
+    LoginRequiredMixin,
+    TemplateView
+):
+
+    template_name = "accounts/profile_edit.html"
+
+    def get_context_data(self, **kwargs):
+
+        context = super().get_context_data(**kwargs)
+
+        profile, created = StudentProfile.objects.get_or_create(
+            user=self.request.user
+        )
+
+        context["profile"] = profile
+
+        context["user_form"] = UserInformationForm(
+            instance=self.request.user
+        )
+
+        context["profile_form"] = StudentProfileForm(
+            instance=profile
+        )
+
+        return context
+
+    def post(self, request, *args, **kwargs):
+
+        profile, created = StudentProfile.objects.get_or_create(
+            user=request.user
+        )
+
+        user_form = UserInformationForm(
+            request.POST,
+            instance=request.user
+        )
+
+        profile_form = StudentProfileForm(
+            request.POST,
+            request.FILES,
+            instance=profile
+        )
+
+        if user_form.is_valid() and profile_form.is_valid():
+
+            user_form.save()
+            profile_form.save()
+
+            messages.success(
+                request,
+                "Your profile has been updated successfully."
+            )
+
+            return redirect(
+                "account_profile"
+            )
+
+        context = self.get_context_data()
+
+        context["user_form"] = user_form
+        context["profile_form"] = profile_form
+
+        return self.render_to_response(context)

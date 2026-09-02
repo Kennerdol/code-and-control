@@ -1,0 +1,119 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<section class="profile-page">
+
+    <div class="profile-container">
+
+        <div class="profile-header">
+
+            <span class="section-label">
+                ACCOUNT SETTINGS
+            </span>
+
+            <h1>
+                Edit Profile
+            </h1>
+
+            <p>
+                Update your personal information.
+            </p>
+
+        </div>
+
+
+        <div class="profile-edit-card">
+
+            <form
+                method="post"
+                enctype="multipart/form-data"
+            >
+
+                {% csrf_token %}
+
+
+                <h2>
+                    Personal Information
+                </h2>
+
+
+                {% for field in user_form %}
+
+                    <div class="form-group">
+
+                        <label for="{{ field.id_for_label }}">
+                            {{ field.label }}
+                        </label>
+
+                        {{ field }}
+
+                        {% if field.errors %}
+
+                            <div class="field-error">
+                                {{ field.errors }}
+                            </div>
+
+                        {% endif %}
+
+                    </div>
+
+                {% endfor %}
+
+
+                <h2 class="profile-form-heading">
+                    Student Profile
+                </h2>
+
+
+                {% for field in profile_form %}
+
+                    <div class="form-group">
+
+                        <label for="{{ field.id_for_label }}">
+                            {{ field.label }}
+                        </label>
+
+                        {{ field }}
+
+                        {% if field.errors %}
+
+                            <div class="field-error">
+                                {{ field.errors }}
+                            </div>
+
+                        {% endif %}
+
+                    </div>
+
+                {% endfor %}
+
+
+                <div class="profile-form-actions">
+
+                    <a
+                        href="{% url 'account_profile' %}"
+                        class="btn"
+                    >
+                        Cancel
+                    </a>
+
+                    <button
+                        type="submit"
+                        class="btn btn-primary"
+                    >
+                        Save Changes
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

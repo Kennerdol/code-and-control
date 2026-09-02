@@ -6,9 +6,7 @@ from .models import Enrollment
 class EnrollmentForm(forms.ModelForm):
 
     class Meta:
-
         model = Enrollment
-
         fields = [
             "name",
             "email",
@@ -17,36 +15,47 @@ class EnrollmentForm(forms.ModelForm):
         ]
 
         widgets = {
-
             "name": forms.TextInput(
                 attrs={
-                    "placeholder": "Your full name",
                     "class": "form-input",
+                    "placeholder": "Your full name",
                 }
             ),
-
             "email": forms.EmailInput(
                 attrs={
-                    "placeholder": "Your email address",
                     "class": "form-input",
+                    "placeholder": "Your email address",
                 }
             ),
-
             "phone": forms.TextInput(
                 attrs={
-                    "placeholder": "Phone number",
                     "class": "form-input",
+                    "placeholder": "Phone number (optional)",
                 }
             ),
-
             "message": forms.Textarea(
                 attrs={
-                    "placeholder": (
-                        "Tell me a little about yourself "
-                        "and what you want to learn."
-                    ),
                     "class": "form-input",
+                    "placeholder": "Tell us anything we should know...",
                     "rows": 5,
                 }
             ),
         }
+
+    def __init__(self, *args, user=None, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        # Logged-in student
+        if user and user.is_authenticated:
+
+            full_name = user.get_full_name().strip()
+
+            if not full_name:
+                full_name = user.username
+
+            self.fields["name"].initial = full_name
+            self.fields["email"].initial = user.email
+
+            # Prevent changing account details during enrollment
+            self.fields["name"].disabled = True
+            self.fields["email"].disabled = True

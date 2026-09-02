@@ -3,6 +3,8 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.forms import AuthenticationForm
 
+from accounts.models import StudentProfile
+
 
 class RegisterForm(UserCreationForm):
 
@@ -84,3 +86,75 @@ class LoginForm(AuthenticationForm):
             }
         ),
     )
+
+
+class StudentProfileForm(forms.ModelForm):
+    class Meta:
+        model = StudentProfile
+
+        fields = [
+            "phone",
+            "bio",
+            "profile_picture",
+        ]
+
+        widgets = {
+            "phone": forms.TextInput(
+                attrs={
+                    "class": "form-input",
+                    "placeholder": "Phone number",
+                }
+            ),
+
+            "bio": forms.Textarea(
+                attrs={
+                    "class": "form-input",
+                    "placeholder": "Tell us a little about yourself...",
+                    "rows": 5,
+                }
+            ),
+
+            "profile_picture": forms.ClearableFileInput(
+                attrs={
+                    "class": "form-input",
+                }
+            ),
+        }
+
+
+
+class UserInformationForm(forms.ModelForm):
+
+    class Meta:
+
+        model = User
+
+        fields = [
+            "first_name",
+            "last_name",
+            "email",
+        ]
+
+        widgets = {
+
+            "first_name": forms.TextInput(
+                attrs={
+                    "class": "form-input",
+                    "placeholder": "First name",
+                }
+            ),
+
+            "last_name": forms.TextInput(
+                attrs={
+                    "class": "form-input",
+                    "placeholder": "Last name",
+                }
+            ),
+
+            "email": forms.EmailInput(
+                attrs={
+                    "class": "form-input",
+                    "placeholder": "Email address",
+                }
+            ),
+        }

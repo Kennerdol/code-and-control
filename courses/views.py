@@ -1,46 +1,37 @@
 from django.contrib import messages
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import get_object_or_404, redirect
 from django.views.generic import DetailView, FormView, ListView
 
 from .forms import EnrollmentForm
-from .models import Course
+from .models import Course, Enrollment
 
 
 class CourseListView(ListView):
-
     model = Course
-
     template_name = "courses/course_list.html"
-
     context_object_name = "courses"
 
     def get_queryset(self):
-
         return Course.objects.filter(
             status="published"
-        ).order_by("-created_at")
+        )
 
 
 class CourseDetailView(DetailView):
-
     model = Course
-
     template_name = "courses/course_detail.html"
-
     context_object_name = "course"
 
     def get_queryset(self):
-
         return Course.objects.filter(
             status="published"
         )
 
 
 class EnrollmentView(FormView):
-
-    form_class = EnrollmentForm
-
     template_name = "courses/enroll.html"
+    form_class = EnrollmentForm
 
     def dispatch(self, request, *args, **kwargs):
 
@@ -56,6 +47,14 @@ class EnrollmentView(FormView):
             **kwargs
         )
 
+    def get_form_kwargs(self):
+
+        kwargs = super().get_form_kwargs()
+
+        kwargs["user"] = self.request.user
+
+        return kwargs
+
     def get_context_data(self, **kwargs):
 
         context = super().get_context_data(**kwargs)
@@ -64,49 +63,34 @@ class EnrollmentView(FormView):
 
         return context
 
-
     def form_valid(self, form):
 
-        enrollment = form.save(
-            commit=False
-        )
+        enrollment = form.save(commit=False)
 
         enrollment.course = self.course
 
+        # Associate enrollment with logged-in user
         if self.request.user.is_authenticated:
 
             enrollment.user = self.request.user
 
-            enrollment.name = (
-                self.request.user.get_full_name()
-                or self.request.user.username
-            )
+            full_name = self.request.user.get_full_name().strip()
 
-            enrollment.email = (
-                self.request.user.email
-            )
+            if not full_name:
+                full_name = self.request.user.username
+
+            enrollment.name = full_name
+            enrollment.email = self.request.user.email
 
         enrollment.save()
 
         messages.success(
             self.request,
-            (
-                "Your enrollment request has been received. "
-                "We'll contact you shortly."
-            )
+            f"You have successfully submitted your enrollment "
+            f"request for {self.course.title}."
         )
 
         return redirect(
             "course_detail",
             slug=self.course.slug
         )
-
-
-    def form_invalid(self, form):
-
-        messages.error(
-            self.request,
-            "Please correct the errors below."
-        )
-
-        return super().form_invalid(form)

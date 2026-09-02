@@ -1,11 +1,9 @@
+from django.conf.urls import static
 from django.urls import path
 
-from .views import (
-    DashboardView,
-    LogoutView,
-    RegisterView,
-    UserLoginView,
-)
+from config import settings
+
+from .views import *
 
 
 urlpatterns = [
@@ -32,6 +30,18 @@ urlpatterns = [
         "dashboard/",
         DashboardView.as_view(),
         name="account_dashboard",
+    ),
+
+    path(
+        "profile/",
+        StudentProfileView.as_view(),
+        name="account_profile"
+    ),
+
+    path(
+        "profile/edit/",
+        StudentProfileUpdateView.as_view(),
+        name="account_profile_edit"
     ),
 
 ]
