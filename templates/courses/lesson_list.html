@@ -1,0 +1,158 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<section class="lessons-page">
+
+    <div class="lessons-container">
+
+        <div class="lessons-header">
+
+            <span class="section-label">
+                COURSE LESSONS
+            </span>
+
+            <h1>
+                {{ course.title }}
+            </h1>
+
+            {% if user.is_authenticated %}
+
+                <div class="course-progress">
+
+                    <div class="course-progress-header">
+
+                        <span>
+                            Course Progress
+                        </span>
+
+                        <strong>
+                            {{ course_progress }}%
+                        </strong>
+
+                    </div>
+
+                    <div class="progress-bar">
+
+                        <div
+                            class="progress-fill"
+                            style="width: {{ course_progress }}%;"
+                        ></div>
+
+                    </div>
+
+                </div>
+
+            {% endif %}
+
+
+            <p>
+                Work through the lessons in order to complete this course.
+            </p>
+
+        </div>
+
+
+        <div class="lessons-list">
+
+            {% for lesson in lessons %}
+
+                <a
+                    href="{% url 'lesson_detail' course_slug=course.slug slug=lesson.slug %}"
+                    class="lesson-card {% if lesson.id in completed_lesson_ids %}lesson-card-completed{% endif %}"
+                >
+
+                    <div class="lesson-number">
+
+                        {% if lesson.id in completed_lesson_ids %}
+
+                            ✓
+
+                        {% else %}
+
+                            {{ lesson.order }}
+
+                        {% endif %}
+
+                    </div>
+
+
+                    <div class="lesson-info">
+
+                        <h2>
+                            {{ lesson.title }}
+                        </h2>
+
+                        {% if lesson.description %}
+
+                            <p>
+                                {{ lesson.description }}
+                            </p>
+
+                        {% endif %}
+
+                        <div class="lesson-meta">
+
+                            {% if lesson.duration %}
+
+                                <span>
+                                    {{ lesson.duration }}
+                                </span>
+
+                            {% endif %}
+
+                            {% if lesson.id in completed_lesson_ids %}
+
+                                <span>
+                                    Completed
+                                </span>
+
+                            {% endif %}
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="lesson-arrow">
+                        →
+                    </div>
+
+                </a>
+
+            {% empty %}
+
+                <div class="empty-state">
+
+                    <h2>
+                        No lessons available yet
+                    </h2>
+
+                    <p>
+                        Lessons for this course haven't been published yet.
+                    </p>
+
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+
+        <div class="lessons-actions">
+
+            <a
+                href="{% url 'course_detail' course.slug %}"
+                class="btn"
+            >
+                ← Back to Course
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

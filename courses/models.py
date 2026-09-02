@@ -152,3 +152,127 @@ class Enrollment(models.Model):
 
     def __str__(self):
         return f"{self.name} - {self.course.title}"
+
+
+
+class Lesson(models.Model):
+
+    course = models.ForeignKey(
+        Course,
+        on_delete=models.CASCADE,
+        related_name="lessons"
+    )
+
+    title = models.CharField(
+        max_length=200
+    )
+
+    slug = models.SlugField(
+        max_length=220
+    )
+
+    description = models.TextField(
+        blank=True
+    )
+
+    content = models.TextField()
+
+    order = models.PositiveIntegerField(
+        default=1
+    )
+
+    video_url = models.URLField(
+        blank=True
+    )
+
+    duration = models.CharField(
+        max_length=50,
+        blank=True
+    )
+
+    is_published = models.BooleanField(
+        default=True
+    )
+
+    created_at = models.DateTimeField(
+        auto_now_add=True
+    )
+
+    updated_at = models.DateTimeField(
+        auto_now=True
+    )
+
+    class Meta:
+        ordering = ["order"]
+
+        constraints = [
+            models.UniqueConstraint(
+                fields=["course", "slug"],
+                name="unique_lesson_slug_per_course"
+            )
+        ]
+
+    def __str__(self):
+        return f"{self.course.title} - {self.title}"
+
+    def get_absolute_url(self):
+        from django.urls import reverse
+
+        return reverse(
+            "lesson_detail",
+            kwargs={
+                "course_slug": self.course.slug,
+                "slug": self.slug,
+            }
+        )
+
+
+
+class LessonProgress(models.Model):
+
+    user = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name="lesson_progress"
+    )
+
+    lesson = models.ForeignKey(
+        Lesson,
+        on_delete=models.CASCADE,
+        related_name="progress_records"
+    )
+
+    completed = models.BooleanField(
+        default=False
+    )
+
+    completed_at = models.DateTimeField(
+        null=True,
+        blank=True
+    )
+
+    created_at = models.DateTimeField(
+        auto_now_add=True
+    )
+
+    updated_at = models.DateTimeField(
+        auto_now=True
+    )
+
+    class Meta:
+
+        ordering = ["lesson__order"]
+
+        constraints = [
+            models.UniqueConstraint(
+                fields=["user", "lesson"],
+                name="unique_user_lesson_progress"
+            )
+        ]
+
+    def __str__(self):
+
+        return (
+            f"{self.user.username} - "
+            f"{self.lesson.title}"
+        )

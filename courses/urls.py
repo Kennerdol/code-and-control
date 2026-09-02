@@ -4,6 +4,9 @@ from .views import (
     CourseDetailView,
     CourseListView,
     EnrollmentView,
+    LessonCompleteView,
+    LessonDetailView,
+    LessonListView,
 )
 
 
@@ -12,5 +15,8 @@ urlpatterns = [
     path("", CourseListView.as_view(), name="course_list"),
     path("<slug:slug>/", CourseDetailView.as_view(), name="course_detail"),
     path("<slug:slug>/enroll/", EnrollmentView.as_view(), name="course_enroll"),
+    path("<slug:course_slug>/lessons/", LessonListView.as_view(), name="lesson_list"),
+    path("<slug:course_slug>/lessons/<slug:slug>/", LessonDetailView.as_view(), name="lesson_detail"),
+    path("<slug:course_slug>/lessons/<slug:slug>/complete/", LessonCompleteView.as_view(), name="lesson_complete"),
 
 ]

@@ -1,0 +1,191 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<section class="lesson-page">
+
+    <div class="lesson-container">
+
+        <div class="lesson-breadcrumb">
+
+            <a href="{% url 'course_detail' course.slug %}">
+                {{ course.title }}
+            </a>
+
+            <span>
+                /
+            </span>
+
+            <a href="{% url 'lesson_list' course.slug %}">
+                Lessons
+            </a>
+
+            <span>
+                /
+            </span>
+
+            <span>
+                {{ lesson.title }}
+            </span>
+
+        </div>
+
+
+        <article class="lesson-content-card">
+
+            <div class="lesson-heading">
+
+                <span class="section-label">
+                    LESSON {{ lesson.order }}
+                </span>
+
+                <h1>
+                    {{ lesson.title }}
+                </h1>
+
+                {% if lesson.description %}
+
+                    <p>
+                        {{ lesson.description }}
+                    </p>
+
+                {% endif %}
+
+                {% if lesson.duration %}
+
+                    <div class="lesson-duration">
+                        {{ lesson.duration }}
+                    </div>
+
+                {% endif %}
+
+            </div>
+
+
+            {% if lesson.video_url %}
+
+                <div class="lesson-video">
+
+                    <a
+                        href="{{ lesson.video_url }}"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="btn btn-primary"
+                    >
+                        Watch Lesson Video
+                    </a>
+
+                </div>
+
+            {% endif %}
+
+
+            <div class="lesson-body">
+
+                {{ lesson.content|linebreaks }}
+
+            </div>
+
+            <div class="lesson-completion">
+
+                {% if user.is_authenticated %}
+
+                    {% if progress and progress.completed %}
+
+                        <div class="lesson-completed">
+
+                            <span class="completion-icon">
+                                ✓
+                            </span>
+
+                            <div>
+                                <strong>
+                                    Lesson Completed
+                                </strong>
+
+                                {% if progress.completed_at %}
+
+                                    <small>
+                                        Completed
+                                        {{ progress.completed_at|date:"F j, Y" }}
+                                    </small>
+
+                                {% endif %}
+
+                            </div>
+
+                        </div>
+
+                    {% else %}
+
+                        <a
+                            href="{% url 'lesson_complete' course_slug=course.slug slug=lesson.slug %}"
+                            class="btn btn-primary"
+                        >
+                            ✓ Mark Lesson as Complete
+                        </a>
+
+                    {% endif %}
+
+                {% else %}
+
+                    <div class="lesson-login-message">
+
+                        <p>
+                            Login to track your progress through this course.
+                        </p>
+
+                        <a
+                            href="{% url 'account_login' %}?next={{ request.path }}"
+                            class="btn btn-primary"
+                        >
+                            Login to Continue
+                        </a>
+
+                    </div>
+
+                {% endif %}
+
+            </div>
+
+
+            <div class="lesson-navigation">
+
+                {% if lesson.order > 1 %}
+
+                    <a
+                        href="{% url 'lesson_list' course.slug %}"
+                        class="btn"
+                    >
+                        ← All Lessons
+                    </a>
+
+                {% else %}
+
+                    <a
+                        href="{% url 'lesson_list' course.slug %}"
+                        class="btn"
+                    >
+                        ← All Lessons
+                    </a>
+
+                {% endif %}
+
+
+                <a
+                    href="{% url 'lesson_list' course.slug %}"
+                    class="btn btn-primary"
+                >
+                    Course Lessons →
+                </a>
+
+            </div>
+
+        </article>
+
+    </div>
+
+</section>
+
+{% endblock %}

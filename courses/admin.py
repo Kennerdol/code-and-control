@@ -1,7 +1,6 @@
 from django.contrib import admin
 
-from .models import Course, Enrollment
-
+from .models import *
 
 @admin.register(Course)
 class CourseAdmin(admin.ModelAdmin):
@@ -70,4 +69,63 @@ class EnrollmentAdmin(admin.ModelAdmin):
 
     ordering = (
         "-enrolled_at",
+    )
+
+
+
+@admin.register(Lesson)
+class LessonAdmin(admin.ModelAdmin):
+
+    list_display = (
+        "title",
+        "course",
+        "order",
+        "duration",
+        "is_published",
+    )
+
+    list_filter = (
+        "course",
+        "is_published",
+    )
+
+    search_fields = (
+        "title",
+        "course__title",
+    )
+
+    prepopulated_fields = {
+        "slug": ("title",)
+    }
+
+    ordering = (
+        "course",
+        "order",
+    )
+
+
+@admin.register(LessonProgress)
+class LessonProgressAdmin(admin.ModelAdmin):
+
+    list_display = (
+        "user",
+        "lesson",
+        "completed",
+        "completed_at",
+    )
+
+    list_filter = (
+        "completed",
+        "lesson__course",
+    )
+
+    search_fields = (
+        "user__username",
+        "user__email",
+        "lesson__title",
+    )
+
+    ordering = (
+        "user",
+        "lesson__order",
     )
