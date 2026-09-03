@@ -124,6 +124,67 @@
 
         {% endif %}
 
+
+        {% if certificates %}
+
+<section class="dashboard-certificates">
+
+    <div class="dashboard-section-header">
+
+        <h2>
+            My Certificates
+        </h2>
+
+        <p>
+            Certificates you have earned.
+        </p>
+
+    </div>
+
+
+    <div class="certificate-list">
+
+        {% for certificate in certificates %}
+
+            <div class="certificate-card">
+
+                <div>
+
+                    <h3>
+                        {{ certificate.course.title }}
+                    </h3>
+
+                    <p>
+                        Certificate No:
+                        {{ certificate.certificate_number }}
+                    </p>
+
+                    <small>
+                        Issued
+                        {{ certificate.issued_at|date:"F d, Y" }}
+                    </small>
+
+                </div>
+
+
+                <a
+                    href="{% url 'certificate_detail' certificate.pk %}"
+                    class="btn btn-primary"
+                >
+                    View Certificate
+                </a>
+
+            </div>
+
+        {% endfor %}
+
+    </div>
+
+</section>
+
+{% endif %}
+
+
     </div>
 
 </section>

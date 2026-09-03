@@ -6,7 +6,7 @@ from django.views.generic import CreateView, TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 from accounts.models import StudentProfile
-from courses.models import Enrollment
+from courses.models import Certificate, Enrollment
 from courses.services import get_course_statistics
 from .forms import *
 
@@ -81,6 +81,10 @@ class DashboardView(
             })
 
         context["dashboard_courses"] = dashboard_courses
+
+        context["certificates"] = Certificate.objects.filter(
+            user=self.request.user
+        ).select_related("course")
 
         return context
     

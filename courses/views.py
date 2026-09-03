@@ -3,8 +3,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import get_object_or_404, redirect
 from django.views.generic import DetailView, FormView, ListView
 
-from courses.services import *
-
+from .services import *
 from .forms import *
 from .models import *
 
@@ -198,26 +197,62 @@ class LessonCompleteView(
     def get_queryset(self):
 
         return Lesson.objects.filter(
+            course__slug=self.kwargs["course_slug"],
             course__status="published",
             is_published=True
         )
 
     def get(self, request, *args, **kwargs):
 
-        lesson = self.get_object()
+        self.object = self.get_object()
 
         mark_lesson_complete(
             request.user,
-            lesson
+            self.object
         )
 
-        messages.success(
-            request,
-            f"Lesson '{lesson.title}' marked as complete."
+        certificate = issue_course_certificate(
+            request.user,
+            self.object.course
         )
+
+        if certificate:
+
+            messages.success(
+                request,
+                "Congratulations! You have completed the course."
+            )
+
+        else:
+
+            messages.success(
+                request,
+                f'Lesson "{self.object.title}" marked as completed.'
+            )
 
         return redirect(
             "lesson_detail",
-            course_slug=lesson.course.slug,
-            slug=lesson.slug
+            course_slug=self.object.course.slug,
+            slug=self.object.slug
+        )
+
+
+class CertificateDetailView(
+    LoginRequiredMixin,
+    DetailView
+):
+
+    model = Certificate
+    template_name = "courses/certificate.html"
+    context_object_name = "certificate"
+
+    pk_url_kwarg = "certificate_id"
+
+    def get_queryset(self):
+
+        return Certificate.objects.filter(
+            user=self.request.user
+        ).select_related(
+            "course",
+            "user"
         )

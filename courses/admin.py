@@ -129,3 +129,33 @@ class LessonProgressAdmin(admin.ModelAdmin):
         "user",
         "lesson__order",
     )
+
+
+@admin.register(Certificate)
+class CertificateAdmin(admin.ModelAdmin):
+
+    list_display = (
+        "certificate_number",
+        "user",
+        "course",
+        "issued_at",
+    )
+
+    list_filter = (
+        "course",
+        "issued_at",
+    )
+
+    search_fields = (
+        "certificate_number",
+        "user__username",
+        "user__first_name",
+        "user__last_name",
+        "course__title",
+    )
+
+    readonly_fields = (
+        "certificate_number",
+        "issued_at",
+        "created_at",
+    )

@@ -1,6 +1,5 @@
 from django.utils import timezone
-
-from .models import Lesson, LessonProgress
+from .models import Certificate, Lesson, LessonProgress
 
 
 def mark_lesson_complete(user, lesson):
@@ -104,3 +103,35 @@ def get_course_statistics(user, course):
         "progress": progress,
         "status": status,
     }
+
+
+def issue_course_certificate(user, course):
+    """
+    Issue a certificate if the student has
+    completed the entire course.
+    """
+
+    total_lessons = Lesson.objects.filter(
+        course=course,
+        is_published=True
+    ).count()
+
+    completed_lessons = LessonProgress.objects.filter(
+        user=user,
+        lesson__course=course,
+        lesson__is_published=True,
+        completed=True
+    ).count()
+
+    if total_lessons == 0:
+        return None
+
+    if completed_lessons < total_lessons:
+        return None
+
+    certificate, created = Certificate.objects.get_or_create(
+        user=user,
+        course=course
+    )
+
+    return certificate

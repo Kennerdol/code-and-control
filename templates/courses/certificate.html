@@ -1,0 +1,112 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<section class="certificate-page">
+
+    <div class="certificate-container">
+
+        <div class="certificate">
+
+            <div class="certificate-header">
+
+                <span class="certificate-brand">
+                    CODE & CONTROL
+                </span>
+
+                <p>
+                    WHERE SOFTWARE MEETS AUTOMATION
+                </p>
+
+            </div>
+
+
+            <div class="certificate-body">
+
+                <p class="certificate-label">
+                    CERTIFICATE OF COMPLETION
+                </p>
+
+                <h1>
+                    Certificate of Achievement
+                </h1>
+
+                <p>
+                    This certificate is proudly presented to
+                </p>
+
+                <h2>
+                    {{ certificate.user.get_full_name|default:certificate.user.username }}
+                </h2>
+
+                <p>
+                    for successfully completing the course
+                </p>
+
+                <h3>
+                    {{ certificate.course.title }}
+                </h3>
+
+                <p class="certificate-date">
+                    Issued on
+                    {{ certificate.issued_at|date:"F d, Y" }}
+                </p>
+
+            </div>
+
+
+            <div class="certificate-footer">
+
+                <div>
+
+                    <strong>
+                        Code & Control
+                    </strong>
+
+                    <span>
+                        Learning Platform
+                    </span>
+
+                </div>
+
+                <div>
+
+                    <strong>
+                        Certificate No.
+                    </strong>
+
+                    <span>
+                        {{ certificate.certificate_number }}
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="certificate-actions">
+
+            <button
+                onclick="window.print()"
+                class="btn btn-primary"
+            >
+                Print / Save Certificate
+            </button>
+
+            <a
+                href="{% url 'account_dashboard' %}"
+                class="btn"
+            >
+                Back to My Learning
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

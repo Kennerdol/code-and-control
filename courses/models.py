@@ -1,3 +1,5 @@
+import uuid
+
 from django.db import models
 from django.urls import reverse
 from django.contrib.auth.models import User
@@ -276,3 +278,58 @@ class LessonProgress(models.Model):
             f"{self.user.username} - "
             f"{self.lesson.title}"
         )
+
+
+class Certificate(models.Model):
+
+    user = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name="certificates"
+    )
+
+    course = models.ForeignKey(
+        Course,
+        on_delete=models.CASCADE,
+        related_name="certificates"
+    )
+
+    certificate_number = models.CharField(
+        max_length=50,
+        unique=True,
+        editable=False
+    )
+
+    issued_at = models.DateTimeField(
+        auto_now_add=True
+    )
+
+    created_at = models.DateTimeField(
+        auto_now_add=True
+    )
+
+    class Meta:
+        ordering = ["-issued_at"]
+
+        constraints = [
+            models.UniqueConstraint(
+                fields=["user", "course"],
+                name="unique_user_course_certificate"
+            )
+        ]
+
+    def __str__(self):
+        return (
+            f"{self.user.username} - "
+            f"{self.course.title}"
+        )
+
+    def save(self, *args, **kwargs):
+
+        if not self.certificate_number:
+
+            self.certificate_number = (
+                f"CC-{uuid.uuid4().hex[:10].upper()}"
+            )
+
+        super().save(*args, **kwargs)

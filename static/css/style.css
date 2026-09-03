@@ -5305,3 +5305,183 @@ select {
     }
 
 }
+
+
+/* =========================================
+   CERTIFICATE
+========================================= */
+
+.certificate-page {
+    padding: 70px 20px;
+}
+
+.certificate-container {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.certificate {
+    padding: 70px;
+
+    border: 8px solid #d4af37;
+
+    background: white;
+    color: #111;
+
+    text-align: center;
+
+    box-shadow:
+        0 20px 50px rgba(0, 0, 0, 0.2);
+}
+
+.certificate-header {
+    margin-bottom: 50px;
+}
+
+.certificate-brand {
+    font-size: 28px;
+    font-weight: 800;
+    letter-spacing: 4px;
+}
+
+.certificate-header p {
+    margin-top: 8px;
+
+    font-size: 12px;
+    letter-spacing: 2px;
+}
+
+.certificate-label {
+    font-size: 16px;
+
+    font-weight: 700;
+
+    letter-spacing: 4px;
+}
+
+.certificate-body h1 {
+    font-size: 38px;
+    margin: 20px 0 35px;
+}
+
+.certificate-body h2 {
+    font-size: 42px;
+
+    margin: 25px 0;
+
+    font-weight: 700;
+}
+
+.certificate-body h3 {
+    font-size: 30px;
+
+    margin: 25px 0;
+}
+
+.certificate-date {
+    margin-top: 40px;
+}
+
+.certificate-footer {
+    margin-top: 60px;
+
+    padding-top: 30px;
+
+    border-top: 1px solid #ccc;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    gap: 30px;
+}
+
+.certificate-footer div {
+    display: flex;
+    flex-direction: column;
+
+    gap: 5px;
+}
+
+.certificate-actions {
+    margin-top: 30px;
+
+    display: flex;
+
+    justify-content: center;
+
+    gap: 15px;
+}
+
+@media print {
+
+    body {
+        background: white !important;
+    }
+
+    nav,
+    footer,
+    .messages-container,
+    .certificate-actions {
+        display: none !important;
+    }
+
+    .certificate-page {
+        padding: 0;
+    }
+
+    .certificate {
+        box-shadow: none;
+
+        width: 100%;
+    }
+
+}
+
+
+.dashboard-certificates {
+    margin-top: 60px;
+}
+
+.dashboard-section-header {
+    margin-bottom: 25px;
+}
+
+.certificate-list {
+    display: grid;
+    gap: 20px;
+}
+
+.certificate-card {
+    padding: 25px;
+
+    border: 1px solid var(--border);
+
+    border-radius: 12px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    gap: 20px;
+}
+
+.certificate-card h3 {
+    margin-bottom: 8px;
+}
+
+.certificate-card p {
+    margin-bottom: 5px;
+}
+
+@media (max-width: 700px) {
+
+    .certificate-card {
+        flex-direction: column;
+
+        align-items: flex-start;
+    }
+
+}
