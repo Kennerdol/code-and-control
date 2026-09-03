@@ -7,6 +7,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 
 from accounts.models import StudentProfile
 from courses.models import Enrollment
+from courses.services import get_course_statistics
 from .forms import *
 
 
@@ -48,41 +49,41 @@ class UserLoginView(LoginView):
         return "/accounts/dashboard/"
 
 
-class DashboardView(TemplateView):
+
+class DashboardView(
+    LoginRequiredMixin,
+    TemplateView
+):
 
     template_name = "accounts/dashboard.html"
-
-    def dispatch(
-        self,
-        request,
-        *args,
-        **kwargs
-    ):
-
-        if not request.user.is_authenticated:
-
-            return redirect(
-                "account_login"
-            )
-
-        return super().dispatch(
-            request,
-            *args,
-            **kwargs
-        )
 
     def get_context_data(self, **kwargs):
 
         context = super().get_context_data(**kwargs)
 
-        context["enrollments"] = Enrollment.objects.filter(
+        enrollments = Enrollment.objects.filter(
             user=self.request.user
-        ).select_related(
-            "course"
-        )
+        ).select_related("course")
+
+        dashboard_courses = []
+
+        for enrollment in enrollments:
+
+            stats = get_course_statistics(
+                self.request.user,
+                enrollment.course
+            )
+
+            dashboard_courses.append({
+                "course": enrollment.course,
+                "enrollment": enrollment,
+                "stats": stats,
+            })
+
+        context["dashboard_courses"] = dashboard_courses
 
         return context
-
+    
 
 class LogoutView(TemplateView):
 

@@ -1,127 +1,99 @@
 {% extends "base.html" %}
-{% load static %}
-
-
-{% block title %}
-    My Learning | Code & Control
-{% endblock %}
-
 
 {% block content %}
 
-<section class="page-header">
-
-    <div class="page-header-container">
-
-        <span class="section-label">
-            MY LEARNING
-        </span>
-
-        <h1>
-            Welcome, {{ user.first_name }}.
-        </h1>
-
-        <p>
-            Your learning journey starts here.
-        </p>
-
-    </div>
-
-</section>
-
-
-<section class="section">
+<section class="dashboard-page">
 
     <div class="dashboard-container">
 
-        <div class="dashboard-section">
+        <div class="dashboard-header">
 
-            <div class="dashboard-section-header">
+            <span class="section-label">
+                MY LEARNING
+            </span>
 
-                <div>
+            <h1>
+                Welcome back, {{ user.first_name|default:user.username }}
+            </h1>
 
-                    <span class="section-label">
-                        MY LEARNING
-                    </span>
+            <p>
+                Continue your learning journey.
+            </p>
 
-                    <h2>
-                        Your Courses
-                    </h2>
-
-                </div>
-
-            </div>
+        </div>
 
 
-            <div class="dashboard-course-grid">
+        {% if dashboard_courses %}
 
-                {% for enrollment in enrollments %}
+            <div class="dashboard-courses">
 
-                    <article class="dashboard-course-card">
+                {% for item in dashboard_courses %}
 
-                        {% if enrollment.course.featured_image %}
+                    <div class="dashboard-course-card">
 
-                            <img
-                                src="{{ enrollment.course.featured_image.url }}"
-                                alt="{{ enrollment.course.title }}"
-                            >
+                        <div class="dashboard-course-header">
 
-                        {% else %}
+                            <h2>
+                                {{ item.course.title }}
+                            </h2>
 
-                            <div class="course-placeholder">
-                                &lt;/&gt;
-                            </div>
-
-                        {% endif %}
-
-
-                        <div class="dashboard-course-content">
-
-                            <span class="course-status">
-                                {{ enrollment.get_status_display }}
+                            <span class="dashboard-status
+                                {% if item.stats.status == 'Completed' %}
+                                    status-completed
+                                {% elif item.stats.status == 'In Progress' %}
+                                    status-progress
+                                {% endif %}
+                            ">
+                                {{ item.stats.status }}
                             </span>
-
-
-                            <h3>
-                                {{ enrollment.course.title }}
-                            </h3>
-
-
-                            <p>
-                                {{ enrollment.course.short_description }}
-                            </p>
-
-
-                            <a
-                                href="{{ enrollment.course.get_absolute_url }}"
-                                class="resource-link"
-                            >
-                                View Course →
-                            </a>
 
                         </div>
 
-                    </article>
-
-                {% empty %}
-
-                    <div class="dashboard-empty">
-
-                        <h3>
-                            You haven't enrolled in any courses yet.
-                        </h3>
 
                         <p>
-                            Explore our courses and start building
-                            your skills.
+                            {{ item.stats.completed_lessons }}
+                            of
+                            {{ item.stats.total_lessons }}
+                            lessons completed
                         </p>
 
-                        <a
-                            href="{% url 'course_list' %}"
-                            class="btn btn-primary"
-                        >
-                            Browse Courses →
-                        </a>
+
+                        <div class="dashboard-progress-bar">
+
+                            <div
+                                class="dashboard-progress-fill"
+                                style="width: {{ item.stats.progress }}%;"
+                            ></div>
+
+                        </div>
+
+
+                        <div class="dashboard-progress-info">
+
+                            <span>
+                                {{ item.stats.progress }}%
+                            </span>
+
+                        </div>
+
+
+                        <div class="dashboard-actions">
+
+                            <a
+                                href="{% url 'lesson_list' item.course.slug %}"
+                                class="btn btn-primary"
+                            >
+                                Continue Learning
+                            </a>
+
+                            <a
+                                href="{% url 'course_detail' item.course.slug %}"
+                                class="btn"
+                            >
+                                Course Details
+                            </a>
+
+                        </div>
 
                     </div>
 
@@ -129,24 +101,28 @@
 
             </div>
 
-        </div>
+        {% else %}
 
+            <div class="dashboard-empty">
 
-        <div class="dashboard-card">
+                <h2>
+                    No courses yet
+                </h2>
 
-            <span class="section-label">
-                ACCOUNT
-            </span>
+                <p>
+                    Start learning by enrolling in a course.
+                </p>
 
-            <h2>
-                Profile
-            </h2>
+                <a
+                    href="{% url 'course_list' %}"
+                    class="btn btn-primary"
+                >
+                    Browse Courses
+                </a>
 
-            <p>
-                {{ user.email }}
-            </p>
+            </div>
 
-        </div>
+        {% endif %}
 
     </div>
 

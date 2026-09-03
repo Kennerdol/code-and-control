@@ -64,3 +64,43 @@ def get_course_progress(user, course):
     return round(
         (completed_lessons / total_lessons) * 100
     )
+
+
+def get_course_statistics(user, course):
+    """
+    Return complete course statistics.
+    """
+
+    total_lessons = Lesson.objects.filter(
+        course=course,
+        is_published=True
+    ).count()
+
+    completed_lessons = LessonProgress.objects.filter(
+        user=user,
+        lesson__course=course,
+        lesson__is_published=True,
+        completed=True
+    ).count()
+
+    progress = 0
+
+    if total_lessons > 0:
+        progress = round(
+            (completed_lessons / total_lessons) * 100
+        )
+
+    status = "Not Started"
+
+    if progress > 0:
+        status = "In Progress"
+
+    if progress == 100:
+        status = "Completed"
+
+    return {
+        "total_lessons": total_lessons,
+        "completed_lessons": completed_lessons,
+        "progress": progress,
+        "status": status,
+    }
